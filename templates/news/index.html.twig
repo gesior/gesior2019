@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News!{% endblock %}
+
+{% block body %}
+    <form method="post">
+
+        <h1 class="h3 mb-3 font-weight-normal">News bla bla bla</h1>
+
+        {% if account %}
+            <a href="{{ url('security_logout') }}" class="btn btn-lg btn-primary" type="submit">
+                Logout
+            </a>
+            Logged in as {{ account.username }}
+        {% else %}
+            <a href="{{ url('security_login') }}" class="btn btn-lg btn-primary">
+                Login
+            </a>
+            Not logged in
+        {% endif %}
+    </form>
+{% endblock %}

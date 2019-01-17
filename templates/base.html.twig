@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    Current: {{ app.request.locale|upper }}<br />
+    Change:
+    {% for local in available_locales %}
+        <a href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'_locale': local})) }}">{{ local|upper }}</a>
+    {% endfor %}
+    <br />
+    Test translation: {{ "test"|trans }}
+    <hr/>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

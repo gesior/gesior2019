@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {{ form(form) }}
+{% endblock %}

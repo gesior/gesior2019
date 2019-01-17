@@ -1,0 +1,2 @@
+security_logout:
+    path: /do_logout
