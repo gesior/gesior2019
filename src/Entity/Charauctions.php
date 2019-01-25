@@ -64,5 +64,82 @@ class Charauctions
      */
     private $highestBid;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getPlayerId(): ?int
+    {
+        return $this->playerId;
+    }
+
+    public function setPlayerId(int $playerId): self
+    {
+        $this->playerId = $playerId;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDateTime(): ?\DateTimeInterface
+    {
+        return $this->dateTime;
+    }
+
+    public function setDateTime(\DateTimeInterface $dateTime): self
+    {
+        $this->dateTime = $dateTime;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getBidderId(): ?int
+    {
+        return $this->bidderId;
+    }
+
+    public function setBidderId(?int $bidderId): self
+    {
+        $this->bidderId = $bidderId;
+
+        return $this;
+    }
+
+    public function getHighestBid(): ?int
+    {
+        return $this->highestBid;
+    }
+
+    public function setHighestBid(?int $highestBid): self
+    {
+        $this->highestBid = $highestBid;
+
+        return $this;
+    }
+
 
 }

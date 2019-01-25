@@ -63,5 +63,82 @@ class EventReward
      */
     private $usado;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAccountId(): ?int
+    {
+        return $this->accountId;
+    }
+
+    public function setAccountId(?int $accountId): self
+    {
+        $this->accountId = $accountId;
+
+        return $this;
+    }
+
+    public function getCodigo(): ?string
+    {
+        return $this->codigo;
+    }
+
+    public function setCodigo(?string $codigo): self
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    public function getOpcion(): ?int
+    {
+        return $this->opcion;
+    }
+
+    public function setOpcion(int $opcion): self
+    {
+        $this->opcion = $opcion;
+
+        return $this;
+    }
+
+    public function getTiempoCreado(): ?int
+    {
+        return $this->tiempoCreado;
+    }
+
+    public function setTiempoCreado(int $tiempoCreado): self
+    {
+        $this->tiempoCreado = $tiempoCreado;
+
+        return $this;
+    }
+
+    public function getTiempoUsado(): ?int
+    {
+        return $this->tiempoUsado;
+    }
+
+    public function setTiempoUsado(?int $tiempoUsado): self
+    {
+        $this->tiempoUsado = $tiempoUsado;
+
+        return $this;
+    }
+
+    public function getUsado(): ?int
+    {
+        return $this->usado;
+    }
+
+    public function setUsado(int $usado): self
+    {
+        $this->usado = $usado;
+
+        return $this;
+    }
+
 
 }

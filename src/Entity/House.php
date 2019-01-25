@@ -118,4 +118,177 @@ class House
      * @ORM\Column(name="accepted", type="integer", nullable=false)
      */
     private $accepted = '0';
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getOwner(): ?int
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(int $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getPaid(): ?int
+    {
+        return $this->paid;
+    }
+
+    public function setPaid(int $paid): self
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    public function getWarnings(): ?int
+    {
+        return $this->warnings;
+    }
+
+    public function setWarnings(int $warnings): self
+    {
+        $this->warnings = $warnings;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getRent(): ?int
+    {
+        return $this->rent;
+    }
+
+    public function setRent(int $rent): self
+    {
+        $this->rent = $rent;
+
+        return $this;
+    }
+
+    public function getTownId(): ?int
+    {
+        return $this->townId;
+    }
+
+    public function setTownId(int $townId): self
+    {
+        $this->townId = $townId;
+
+        return $this;
+    }
+
+    public function getBid(): ?int
+    {
+        return $this->bid;
+    }
+
+    public function setBid(int $bid): self
+    {
+        $this->bid = $bid;
+
+        return $this;
+    }
+
+    public function getBidEnd(): ?int
+    {
+        return $this->bidEnd;
+    }
+
+    public function setBidEnd(int $bidEnd): self
+    {
+        $this->bidEnd = $bidEnd;
+
+        return $this;
+    }
+
+    public function getLastBid(): ?int
+    {
+        return $this->lastBid;
+    }
+
+    public function setLastBid(int $lastBid): self
+    {
+        $this->lastBid = $lastBid;
+
+        return $this;
+    }
+
+    public function getHighestBidder(): ?int
+    {
+        return $this->highestBidder;
+    }
+
+    public function setHighestBidder(int $highestBidder): self
+    {
+        $this->highestBidder = $highestBidder;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getBeds(): ?int
+    {
+        return $this->beds;
+    }
+
+    public function setBeds(int $beds): self
+    {
+        $this->beds = $beds;
+
+        return $this;
+    }
+
+    public function getBeingSold(): ?int
+    {
+        return $this->beingSold;
+    }
+
+    public function setBeingSold(int $beingSold): self
+    {
+        $this->beingSold = $beingSold;
+
+        return $this;
+    }
+
+    public function getAccepted(): ?int
+    {
+        return $this->accepted;
+    }
+
+    public function setAccepted(int $accepted): self
+    {
+        $this->accepted = $accepted;
+
+        return $this;
+    }
 }

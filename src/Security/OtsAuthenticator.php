@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,12 +26,15 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
     private $entityManager;
     private $router;
     private $csrfTokenManager;
+    private $otsSecurityService;
 
-    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router,
+                                CsrfTokenManagerInterface $csrfTokenManager, OtsSecurityService $otsSecurityService)
     {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
+        $this->otsSecurityService = $otsSecurityService;
     }
 
     public function supports(Request $request)
@@ -47,6 +51,7 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
             'name' => $loginFormData['name'],
             'password' => $loginFormData['password'],
             'csrf_token' => $loginFormData['_token'],
+            'ip' => $request->getClientIp(),
         ];
 
         $request->getSession()->set(
@@ -59,15 +64,8 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
-        }
-
-        $user = $this->entityManager->getRepository(Account::class)->findOneBy(['name' => $credentials['name']]);
-
-        if (!$user) {
-            throw new BadCredentialsException();
+        if (empty($credentials['ip'])) {
+            throw new CustomUserMessageAuthenticationException('LOGIN_BLOCKED_NO_IP_DETECTED');
         }
 
         // code to block IP of user
@@ -77,6 +75,19 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
         }
         */
 
+        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+        if (!$this->csrfTokenManager->isTokenValid($token)) {
+            throw new InvalidCsrfTokenException();
+        }
+
+        $user = $this->entityManager->getRepository(Account::class)->findOneBy(['name' => $credentials['name']]);
+
+        if (!$user) {
+            // invalid username IP log
+            throw new BadCredentialsException();
+        }
+
+
         return $user;
     }
 
@@ -84,7 +95,13 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
-        return $user->getPassword() == sha1($credentials['password']);
+        $isPasswordValid = $this->otsSecurityService->isValidPassword($user, $credentials['password']);
+
+        if (!$isPasswordValid) {
+            // invalid password IP log
+            // invalid password account log
+        }
+        return $isPasswordValid;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

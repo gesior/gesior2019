@@ -56,5 +56,70 @@ class ZReferral
      */
     private $arrived = '0';
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getRewardId(): ?int
+    {
+        return $this->rewardId;
+    }
+
+    public function setRewardId(int $rewardId): self
+    {
+        $this->rewardId = $rewardId;
+
+        return $this;
+    }
+
+    public function getBought(): ?int
+    {
+        return $this->bought;
+    }
+
+    public function setBought(int $bought): self
+    {
+        $this->bought = $bought;
+
+        return $this;
+    }
+
+    public function getArrived(): ?int
+    {
+        return $this->arrived;
+    }
+
+    public function setArrived(int $arrived): self
+    {
+        $this->arrived = $arrived;
+
+        return $this;
+    }
+
 
 }

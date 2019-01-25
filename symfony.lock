@@ -68,6 +68,18 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "excelwebzone/recaptcha-bundle": {
+        "version": "v1.5.12"
+    },
+    "google/recaptcha": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "155d19cc6b4fddd9393064f553bdbe3f2f16c918"
+        }
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -103,6 +115,9 @@
             "version": "1.0",
             "ref": "c82bead70f9a4f656354a193df7bf0ca2114efa0"
         }
+    },
+    "symfony/asset": {
+        "version": "v4.2.2"
     },
     "symfony/cache": {
         "version": "v4.2.2"
@@ -248,6 +263,9 @@
             "ref": "3db029c03e452b4a23f7fc45cec7c922c2247eb8"
         }
     },
+    "symfony/templating": {
+        "version": "v4.2.2"
+    },
     "symfony/translation": {
         "version": "3.3",
         "recipe": {
@@ -293,8 +311,26 @@
             "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
         }
     },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "248c29c070dcd79e8333c676b0c5e284e3b365b5"
+        }
+    },
     "symfony/yaml": {
         "version": "v4.2.2"
+    },
+    "twig/extensions": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
+        }
     },
     "twig/twig": {
         "version": "v2.6.2"

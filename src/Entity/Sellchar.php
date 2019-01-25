@@ -56,5 +56,70 @@ class Sellchar
      */
     private $oldid;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getVocation(): ?int
+    {
+        return $this->vocation;
+    }
+
+    public function setVocation(int $vocation): self
+    {
+        $this->vocation = $vocation;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getOldid(): ?string
+    {
+        return $this->oldid;
+    }
+
+    public function setOldid(string $oldid): self
+    {
+        $this->oldid = $oldid;
+
+        return $this;
+    }
+
 
 }

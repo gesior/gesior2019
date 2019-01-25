@@ -66,5 +66,82 @@ class GuildwarKill
      */
     private $warid;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getKiller(): ?string
+    {
+        return $this->killer;
+    }
+
+    public function setKiller(string $killer): self
+    {
+        $this->killer = $killer;
+
+        return $this;
+    }
+
+    public function getTarget(): ?string
+    {
+        return $this->target;
+    }
+
+    public function setTarget(string $target): self
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    public function getKillerguild(): ?int
+    {
+        return $this->killerguild;
+    }
+
+    public function setKillerguild(int $killerguild): self
+    {
+        $this->killerguild = $killerguild;
+
+        return $this;
+    }
+
+    public function getTargetguild(): ?int
+    {
+        return $this->targetguild;
+    }
+
+    public function setTargetguild(int $targetguild): self
+    {
+        $this->targetguild = $targetguild;
+
+        return $this;
+    }
+
+    public function getTime(): ?int
+    {
+        return $this->time;
+    }
+
+    public function setTime(int $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    public function getWarid(): ?GuildWar
+    {
+        return $this->warid;
+    }
+
+    public function setWarid(?GuildWar $warid): self
+    {
+        $this->warid = $warid;
+
+        return $this;
+    }
+
 
 }

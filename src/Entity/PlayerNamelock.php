@@ -48,5 +48,53 @@ class PlayerNamelock
      */
     private $namelockedBy;
 
+    public function getReason(): ?string
+    {
+        return $this->reason;
+    }
+
+    public function setReason(string $reason): self
+    {
+        $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getNamelockedAt(): ?int
+    {
+        return $this->namelockedAt;
+    }
+
+    public function setNamelockedAt(int $namelockedAt): self
+    {
+        $this->namelockedAt = $namelockedAt;
+
+        return $this;
+    }
+
+    public function getPlayer(): ?Player
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(?Player $player): self
+    {
+        $this->player = $player;
+
+        return $this;
+    }
+
+    public function getNamelockedBy(): ?Player
+    {
+        return $this->namelockedBy;
+    }
+
+    public function setNamelockedBy(?Player $namelockedBy): self
+    {
+        $this->namelockedBy = $namelockedBy;
+
+        return $this;
+    }
+
 
 }

@@ -48,5 +48,46 @@ class AccountCam
      */
     private $cam;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getVisibilityType(): ?bool
+    {
+        return $this->visibilityType;
+    }
+
+    public function setVisibilityType(bool $visibilityType): self
+    {
+        $this->visibilityType = $visibilityType;
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    public function getCam(): ?Cam
+    {
+        return $this->cam;
+    }
+
+    public function setCam(?Cam $cam): self
+    {
+        $this->cam = $cam;
+
+        return $this;
+    }
+
 
 }

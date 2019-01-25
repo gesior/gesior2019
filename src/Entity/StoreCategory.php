@@ -49,5 +49,58 @@ class StoreCategory
      */
     private $name;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getVisible(): ?int
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(int $visible): self
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
 
 }

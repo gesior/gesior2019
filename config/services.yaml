@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     available_locales: ['en', 'pl']
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -30,3 +31,17 @@ services:
 
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%available_locales%', '%kernel.default_locale%']
+
+    App\Service\MailerService:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@mailer'
+            - '@twig'
+            - '@translator'
+            - '@request_stack'
+            - '%env(MAILER_FROM_ADDRESS)%'
+            - '%env(MAILER_MAIL_TITLE_PREFIX)%'
+            - '%env(MAILER_INFO_MAILS_PER_MAIL_PER_HOUR)%'
+            - '%env(MAILER_SECURITY_MAILS_PER_MAIL_PER_HOUR)%'
+            - '%env(MAILER_INFO_MAILS_PER_IP_PER_HOUR)%'
+            - '%env(MAILER_SECURITY_MAILS_PER_IP_PER_HOUR)%'

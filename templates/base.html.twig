@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-    Current: {{ app.request.locale|upper }}<br />
-    Change:
-    {% for local in available_locales %}
-        <a href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'_locale': local})) }}">{{ local|upper }}</a>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link href="{{ asset('build/app.css') }}" rel="stylesheet"/>
+    <script src="{{ asset('build/app.js') }}"></script>
+    <script src="{{ asset('build/runtime.js') }}"></script>
+    {% block stylesheets %}{% endblock %}
+</head>
+{% if form is defined %}
+    {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% endif %}
+<body>
+Current: {{ app.request.locale|upper }}<br/>
+Change:
+{% for local in available_locales %}
+    <a href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'_locale': local})) }}">{{ local|upper }}</a>
+{% endfor %}
+<br/>
+Test translation: {{ "test"|trans }}
+<hr/>
+<div class="container">
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">{{ flashMessage|trans }}</div>
     {% endfor %}
-    <br />
-    Test translation: {{ "test"|trans }}
-    <hr/>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        <div class="alert alert-warning">{{ flashMessage|trans }}</div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">{{ flashMessage|trans }}</div>
+    {% endfor %}
+    {% block body %}{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

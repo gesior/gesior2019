@@ -63,5 +63,82 @@ class PlayerRefferal
      */
     private $date = '0';
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAccountId(): ?int
+    {
+        return $this->accountId;
+    }
+
+    public function setAccountId(?int $accountId): self
+    {
+        $this->accountId = $accountId;
+
+        return $this;
+    }
+
+    public function getRefferalId(): ?int
+    {
+        return $this->refferalId;
+    }
+
+    public function setRefferalId(?int $refferalId): self
+    {
+        $this->refferalId = $refferalId;
+
+        return $this;
+    }
+
+    public function getPlayerIp(): ?int
+    {
+        return $this->playerIp;
+    }
+
+    public function setPlayerIp(int $playerIp): self
+    {
+        $this->playerIp = $playerIp;
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?int $level): self
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getDate(): ?int
+    {
+        return $this->date;
+    }
+
+    public function setDate(int $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
 
 }

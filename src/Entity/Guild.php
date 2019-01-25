@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -107,6 +108,159 @@ class Guild
     public function __construct()
     {
         $this->player = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCreationdata(): ?int
+    {
+        return $this->creationdata;
+    }
+
+    public function setCreationdata(int $creationdata): self
+    {
+        $this->creationdata = $creationdata;
+
+        return $this;
+    }
+
+    public function getMotd(): ?string
+    {
+        return $this->motd;
+    }
+
+    public function setMotd(string $motd): self
+    {
+        $this->motd = $motd;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getGuildLogo()
+    {
+        return $this->guildLogo;
+    }
+
+    public function setGuildLogo($guildLogo): self
+    {
+        $this->guildLogo = $guildLogo;
+
+        return $this;
+    }
+
+    public function getCreateIp(): ?int
+    {
+        return $this->createIp;
+    }
+
+    public function setCreateIp(int $createIp): self
+    {
+        $this->createIp = $createIp;
+
+        return $this;
+    }
+
+    public function getBalance(): ?int
+    {
+        return $this->balance;
+    }
+
+    public function setBalance(int $balance): self
+    {
+        $this->balance = $balance;
+
+        return $this;
+    }
+
+    public function getLastExecutePoints(): ?int
+    {
+        return $this->lastExecutePoints;
+    }
+
+    public function setLastExecutePoints(int $lastExecutePoints): self
+    {
+        $this->lastExecutePoints = $lastExecutePoints;
+
+        return $this;
+    }
+
+    public function getLogoGfxName(): ?string
+    {
+        return $this->logoGfxName;
+    }
+
+    public function setLogoGfxName(string $logoGfxName): self
+    {
+        $this->logoGfxName = $logoGfxName;
+
+        return $this;
+    }
+
+    public function getOwnerid(): ?Player
+    {
+        return $this->ownerid;
+    }
+
+    public function setOwnerid(?Player $ownerid): self
+    {
+        $this->ownerid = $ownerid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Player[]
+     */
+    public function getPlayer(): Collection
+    {
+        return $this->player;
+    }
+
+    public function addPlayer(Player $player): self
+    {
+        if (!$this->player->contains($player)) {
+            $this->player[] = $player;
+            $player->addGuild($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayer(Player $player): self
+    {
+        if ($this->player->contains($player)) {
+            $this->player->removeElement($player);
+            $player->removeGuild($this);
+        }
+
+        return $this;
     }
 
 }

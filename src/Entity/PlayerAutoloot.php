@@ -38,5 +38,34 @@ class PlayerAutoloot
      */
     private $player;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAutolootList()
+    {
+        return $this->autolootList;
+    }
+
+    public function setAutolootList($autolootList): self
+    {
+        $this->autolootList = $autolootList;
+
+        return $this;
+    }
+
+    public function getPlayer(): ?Player
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(?Player $player): self
+    {
+        $this->player = $player;
+
+        return $this;
+    }
+
 
 }

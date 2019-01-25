@@ -77,5 +77,106 @@ class GuildWar
      */
     private $fraglimit = '0';
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getGuild1(): ?int
+    {
+        return $this->guild1;
+    }
+
+    public function setGuild1(int $guild1): self
+    {
+        $this->guild1 = $guild1;
+
+        return $this;
+    }
+
+    public function getGuild2(): ?int
+    {
+        return $this->guild2;
+    }
+
+    public function setGuild2(int $guild2): self
+    {
+        $this->guild2 = $guild2;
+
+        return $this;
+    }
+
+    public function getName1(): ?string
+    {
+        return $this->name1;
+    }
+
+    public function setName1(string $name1): self
+    {
+        $this->name1 = $name1;
+
+        return $this;
+    }
+
+    public function getName2(): ?string
+    {
+        return $this->name2;
+    }
+
+    public function setName2(string $name2): self
+    {
+        $this->name2 = $name2;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStarted(): ?int
+    {
+        return $this->started;
+    }
+
+    public function setStarted(int $started): self
+    {
+        $this->started = $started;
+
+        return $this;
+    }
+
+    public function getEnded(): ?int
+    {
+        return $this->ended;
+    }
+
+    public function setEnded(int $ended): self
+    {
+        $this->ended = $ended;
+
+        return $this;
+    }
+
+    public function getFraglimit(): ?int
+    {
+        return $this->fraglimit;
+    }
+
+    public function setFraglimit(int $fraglimit): self
+    {
+        $this->fraglimit = $fraglimit;
+
+        return $this;
+    }
+
 
 }

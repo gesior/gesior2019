@@ -1,6 +1,4 @@
 framework:
     default_locale: '%locale%'
     translator:
-        fallbacks:
-            - 'en'
-            - 'pl'
+        fallbacks: '%available_locales%'

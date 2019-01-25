@@ -73,5 +73,94 @@ class MarketOffer
      */
     private $player;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getSale(): ?bool
+    {
+        return $this->sale;
+    }
+
+    public function setSale(bool $sale): self
+    {
+        $this->sale = $sale;
+
+        return $this;
+    }
+
+    public function getItemtype(): ?int
+    {
+        return $this->itemtype;
+    }
+
+    public function setItemtype(int $itemtype): self
+    {
+        $this->itemtype = $itemtype;
+
+        return $this;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(int $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getCreated(): ?int
+    {
+        return $this->created;
+    }
+
+    public function setCreated(int $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getAnonymous(): ?bool
+    {
+        return $this->anonymous;
+    }
+
+    public function setAnonymous(bool $anonymous): self
+    {
+        $this->anonymous = $anonymous;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getPlayer(): ?Player
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(?Player $player): self
+    {
+        $this->player = $player;
+
+        return $this;
+    }
+
 
 }

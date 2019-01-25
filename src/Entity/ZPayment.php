@@ -119,5 +119,178 @@ class ZPayment
      */
     private $addPoints;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getSystem(): ?string
+    {
+        return $this->system;
+    }
+
+    public function setSystem(string $system): self
+    {
+        $this->system = $system;
+
+        return $this;
+    }
+
+    public function getPaymentConfigId(): ?string
+    {
+        return $this->paymentConfigId;
+    }
+
+    public function setPaymentConfigId(string $paymentConfigId): self
+    {
+        $this->paymentConfigId = $paymentConfigId;
+
+        return $this;
+    }
+
+    public function getPaymentData(): ?string
+    {
+        return $this->paymentData;
+    }
+
+    public function setPaymentData(string $paymentData): self
+    {
+        $this->paymentData = $paymentData;
+
+        return $this;
+    }
+
+    public function getClientId(): ?string
+    {
+        return $this->clientId;
+    }
+
+    public function setClientId(string $clientId): self
+    {
+        $this->clientId = $clientId;
+
+        return $this;
+    }
+
+    public function getTransactionId(): ?string
+    {
+        return $this->transactionId;
+    }
+
+    public function setTransactionId(string $transactionId): self
+    {
+        $this->transactionId = $transactionId;
+
+        return $this;
+    }
+
+    public function getSystemTransactionId(): ?string
+    {
+        return $this->systemTransactionId;
+    }
+
+    public function setSystemTransactionId(string $systemTransactionId): self
+    {
+        $this->systemTransactionId = $systemTransactionId;
+
+        return $this;
+    }
+
+    public function getIp(): ?int
+    {
+        return $this->ip;
+    }
+
+    public function setIp(int $ip): self
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getDate(): ?int
+    {
+        return $this->date;
+    }
+
+    public function setDate(int $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAmount(): ?string
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(string $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency(string $currency): self
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    public function getAccountId(): ?int
+    {
+        return $this->accountId;
+    }
+
+    public function setAccountId(int $accountId): self
+    {
+        $this->accountId = $accountId;
+
+        return $this;
+    }
+
+    public function getCoins(): ?int
+    {
+        return $this->coins;
+    }
+
+    public function setCoins(int $coins): self
+    {
+        $this->coins = $coins;
+
+        return $this;
+    }
+
+    public function getAddPoints(): ?int
+    {
+        return $this->addPoints;
+    }
+
+    public function setAddPoints(int $addPoints): self
+    {
+        $this->addPoints = $addPoints;
+
+        return $this;
+    }
+
 
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -44,39 +45,25 @@ class Account implements UserInterface
     private $secret;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="type", type="string", length=256, nullable=false, options={"default"="1"})
      */
-    private $type = '1';
+    private $type = 1;
 
     /**
      * @var int
      *
      * @ORM\Column(name="premdays", type="integer", nullable=false)
      */
-    private $premdays = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="coins", type="integer", nullable=false)
-     */
-    private $coins = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="coins_old", type="integer", nullable=false)
-     */
-    private $coinsOld = '0';
+    private $premiumDays = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="lastday", type="integer", nullable=false, options={"unsigned"=true})
      */
-    private $lastday = '0';
+    private $lastPremiumDaysUpdate = 0;
 
     /**
      * @var string
@@ -88,16 +75,9 @@ class Account implements UserInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="creation", type="integer", nullable=false)
-     */
-    private $creation = '0';
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="vote", type="integer", nullable=false)
      */
-    private $vote = '0';
+    private $vote = 0;
 
     /**
      * @var string|null
@@ -107,25 +87,11 @@ class Account implements UserInterface
     private $key;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="email_new", type="string", length=255, nullable=true)
-     */
-    private $emailNew;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="email_new_time", type="integer", nullable=true)
-     */
-    private $emailNewTime;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="rlname", type="string", length=255, nullable=false)
      */
-    private $rlname = '';
+    private $realName = '';
 
     /**
      * @var string
@@ -139,49 +105,21 @@ class Account implements UserInterface
      *
      * @ORM\Column(name="page_access", type="integer", nullable=false)
      */
-    private $pageAccess = '0';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email_code", type="string", length=255, nullable=false)
-     */
-    private $emailCode = '';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="next_email", type="integer", nullable=false)
-     */
-    private $nextEmail = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="premium_points", type="integer", nullable=false)
-     */
-    private $premiumPoints = '0';
+    private $pageAccess = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="create_date", type="integer", nullable=false)
      */
-    private $createDate = '0';
+    private $createDate = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="create_ip", type="integer", nullable=false, options={"unsigned"=true})
      */
-    private $createIp = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="last_post", type="integer", nullable=false)
-     */
-    private $lastPost = '0';
+    private $createIp = 0;
 
     /**
      * @var string
@@ -193,73 +131,23 @@ class Account implements UserInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="vip_time", type="integer", nullable=false)
-     */
-    private $vipTime = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="guild_points", type="integer", nullable=false)
-     */
-    private $guildPoints = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="loyalty", type="integer", nullable=false)
-     */
-    private $loyalty = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="guild_points_stats", type="integer", nullable=false)
-     */
-    private $guildPointsStats = '0';
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="warnings", type="integer", nullable=false, options={"unsigned"=true})
      */
-    private $warnings = '0';
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="creation_key", type="integer", nullable=true)
-     */
-    private $creationKey;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="key_sent", type="integer", nullable=false)
-     */
-    private $keySent = '0';
+    private $warnings = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="referrer", type="integer", nullable=false)
      */
-    private $referrer = '0';
+    private $referrer = 0;
 
     /**
-     * @var int
+     * @var Player[]
      *
-     * @ORM\Column(name="paid_out", type="integer", nullable=false)
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="account")
      */
-    private $paidOut = '0';
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="verify_bugs", type="integer", nullable=false)
-     */
-    private $verifyBugs = '0';
-
+    private $players;
 
     /**
      * Returns the roles granted to the user.
@@ -273,7 +161,7 @@ class Account implements UserInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return (Role|string)[] The user roles
+     * @return string[]|Role[] The user roles
      */
     public function getRoles()
     {
@@ -312,7 +200,7 @@ class Account implements UserInterface
      */
     public function getUsername()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -324,5 +212,209 @@ class Account implements UserInterface
     public function eraseCredentials()
     {
         $this->key = '';
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSecret(): ?string
+    {
+        return $this->secret;
+    }
+
+    public function setSecret(?string $secret): self
+    {
+        $this->secret = $secret;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPremiumDays(): ?int
+    {
+        return $this->premiumDays;
+    }
+
+    public function setPremiumDays(int $premiumDays): self
+    {
+        $this->premiumDays = $premiumDays;
+
+        return $this;
+    }
+
+    public function getLastPremiumDaysUpdate(): ?int
+    {
+        return $this->lastPremiumDaysUpdate;
+    }
+
+    public function setLastPremiumDaysUpdate(int $lastPremiumDaysUpdate): self
+    {
+        $this->lastPremiumDaysUpdate = $lastPremiumDaysUpdate;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getVote(): ?int
+    {
+        return $this->vote;
+    }
+
+    public function setVote(int $vote): self
+    {
+        $this->vote = $vote;
+
+        return $this;
+    }
+
+    public function getKey(): ?string
+    {
+        return $this->key;
+    }
+
+    public function setKey(?string $key): self
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    public function getRealName(): ?string
+    {
+        return $this->realName;
+    }
+
+    public function setRealName(string $realName): self
+    {
+        $this->realName = $realName;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getPageAccess(): ?int
+    {
+        return $this->pageAccess;
+    }
+
+    public function setPageAccess(int $pageAccess): self
+    {
+        $this->pageAccess = $pageAccess;
+
+        return $this;
+    }
+
+    public function getCreateDate(): ?int
+    {
+        return $this->createDate;
+    }
+
+    public function setCreateDate(int $createDate): self
+    {
+        $this->createDate = $createDate;
+
+        return $this;
+    }
+
+    public function getCreateIp(): ?int
+    {
+        return $this->createIp;
+    }
+
+    public function setCreateIp(int $createIp): self
+    {
+        $this->createIp = $createIp;
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(string $flag): self
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    public function getWarnings(): ?int
+    {
+        return $this->warnings;
+    }
+
+    public function setWarnings(int $warnings): self
+    {
+        $this->warnings = $warnings;
+
+        return $this;
+    }
+
+    public function getReferrer(): ?int
+    {
+        return $this->referrer;
+    }
+
+    public function setReferrer(int $referrer): self
+    {
+        $this->referrer = $referrer;
+
+        return $this;
     }
 }

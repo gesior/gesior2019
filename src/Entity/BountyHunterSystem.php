@@ -77,5 +77,106 @@ class BountyHunterSystem
      */
     private $datekilled;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getHunterId(): ?int
+    {
+        return $this->hunterId;
+    }
+
+    public function setHunterId(int $hunterId): self
+    {
+        $this->hunterId = $hunterId;
+
+        return $this;
+    }
+
+    public function getTargetId(): ?int
+    {
+        return $this->targetId;
+    }
+
+    public function setTargetId(int $targetId): self
+    {
+        $this->targetId = $targetId;
+
+        return $this;
+    }
+
+    public function getKillerId(): ?int
+    {
+        return $this->killerId;
+    }
+
+    public function setKillerId(int $killerId): self
+    {
+        $this->killerId = $killerId;
+
+        return $this;
+    }
+
+    public function getPrize(): ?int
+    {
+        return $this->prize;
+    }
+
+    public function setPrize(int $prize): self
+    {
+        $this->prize = $prize;
+
+        return $this;
+    }
+
+    public function getCurrencytype(): ?string
+    {
+        return $this->currencytype;
+    }
+
+    public function setCurrencytype(string $currencytype): self
+    {
+        $this->currencytype = $currencytype;
+
+        return $this;
+    }
+
+    public function getDateadded(): ?int
+    {
+        return $this->dateadded;
+    }
+
+    public function setDateadded(int $dateadded): self
+    {
+        $this->dateadded = $dateadded;
+
+        return $this;
+    }
+
+    public function getKilled(): ?int
+    {
+        return $this->killed;
+    }
+
+    public function setKilled(int $killed): self
+    {
+        $this->killed = $killed;
+
+        return $this;
+    }
+
+    public function getDatekilled(): ?int
+    {
+        return $this->datekilled;
+    }
+
+    public function setDatekilled(int $datekilled): self
+    {
+        $this->datekilled = $datekilled;
+
+        return $this;
+    }
+
 
 }

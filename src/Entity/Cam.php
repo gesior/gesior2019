@@ -105,5 +105,154 @@ class Cam
      */
     private $public = '0';
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getPlayerId(): ?int
+    {
+        return $this->playerId;
+    }
+
+    public function setPlayerId(int $playerId): self
+    {
+        $this->playerId = $playerId;
+
+        return $this;
+    }
+
+    public function getAccountId(): ?int
+    {
+        return $this->accountId;
+    }
+
+    public function setAccountId(int $accountId): self
+    {
+        $this->accountId = $accountId;
+
+        return $this;
+    }
+
+    public function getPlayerLevel(): ?int
+    {
+        return $this->playerLevel;
+    }
+
+    public function setPlayerLevel(int $playerLevel): self
+    {
+        $this->playerLevel = $playerLevel;
+
+        return $this;
+    }
+
+    public function getPlayerIp(): ?int
+    {
+        return $this->playerIp;
+    }
+
+    public function setPlayerIp(int $playerIp): self
+    {
+        $this->playerIp = $playerIp;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDateStart(): ?int
+    {
+        return $this->dateStart;
+    }
+
+    public function setDateStart(int $dateStart): self
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?int
+    {
+        return $this->dateEnd;
+    }
+
+    public function setDateEnd(int $dateEnd): self
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    public function getOffsetStart(): ?int
+    {
+        return $this->offsetStart;
+    }
+
+    public function setOffsetStart(int $offsetStart): self
+    {
+        $this->offsetStart = $offsetStart;
+
+        return $this;
+    }
+
+    public function getOffsetEnd(): ?int
+    {
+        return $this->offsetEnd;
+    }
+
+    public function setOffsetEnd(int $offsetEnd): self
+    {
+        $this->offsetEnd = $offsetEnd;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): self
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    public function getPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
 
 }

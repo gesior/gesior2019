@@ -56,5 +56,70 @@ class PlayerOnline
      */
     private $protocolVersion = '0';
 
+    public function getPlayerId(): ?int
+    {
+        return $this->playerId;
+    }
+
+    public function getBroadcasting(): ?bool
+    {
+        return $this->broadcasting;
+    }
+
+    public function setBroadcasting(bool $broadcasting): self
+    {
+        $this->broadcasting = $broadcasting;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSpectators(): ?int
+    {
+        return $this->spectators;
+    }
+
+    public function setSpectators(int $spectators): self
+    {
+        $this->spectators = $spectators;
+
+        return $this;
+    }
+
+    public function getProtocolVersion(): ?int
+    {
+        return $this->protocolVersion;
+    }
+
+    public function setProtocolVersion(int $protocolVersion): self
+    {
+        $this->protocolVersion = $protocolVersion;
+
+        return $this;
+    }
+
 
 }

@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-
+{% form_theme form_login 'bootstrap_4_horizontal_layout.html.twig' %}
 {% block body %}
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-    {{ form(form) }}
+
+    {{ form(form_login) }}
+
 {% endblock %}

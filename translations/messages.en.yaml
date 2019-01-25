@@ -1,1 +1,67 @@
 test: tezt
+
+Back: '← Back'
+no: 'no'
+No: 'No'
+NO: 'NO'
+yes: 'yes'
+Yes: 'Yes'
+YES: 'YES'
+
+ACCOUNT:
+    INVALID_PASSWORD_FORMAT:
+        TOO_SHORT: 'New password is too short. Minimum length is %min% letters.'
+        TOO_LONG: 'New password is too long. Maximum length is %max% letters.'
+
+
+    INDEX:
+        GENERAL_INFORMATION: 'General Information'
+        ACCOUNT_NAME: 'Account name'
+        E_MAIL: 'E-mail'
+        CREATED: 'Created'
+        LAST_LOGIN: 'Last login'
+        REGISTERED: 'Registered'
+        2_STEP_VERIFICATION: '2-Step Verification'
+        DISABLE_2FA: 'Disable'
+        ENABLE_2FA: 'Enable now - increase security'
+        ACCOUNT_ACTIONS: 'Edit:'
+        CHANGE_PASSWORD_BUTTON: 'Change Password'
+        CHANGE_EMAIL_BUTTON: 'Change E-mail'
+        REGISTER_BUTTON: 'Register now!'
+        UNREGISTER_BUTTON: 'Unregister - remove Recovery Key'
+        PUBLIC_INFORMATION_ACTIONS: 'Edit:'
+        EDIT_PUBLIC_INFORMATION: 'Change Public Information'
+
+    CHANGE_PASSWORD:
+        TITLE: 'Change Password'
+        CURRENT_PASSWORD: 'Current password'
+        NEW_PASSWORD: 'New password'
+        NEW_PASSWORD_REPEAT: 'Repeat new password'
+        CHANGE_PASSWORD_BUTTON: 'Change Password'
+
+        INVALID_CURRENT_PASSWORD: 'Invalid current password to account.'
+        NEW_PASSWORD_SAME_AS_OLD: 'New password cannot be current password.'
+
+        AFTER_CHANGE_MESSAGE: 'Password to account changed.'
+        MAIL_SENT: 'E-mail with new password sent to your mailbox.'
+
+    CHANGE_PUBLIC_INFORMATION:
+        TITLE: 'Change Public Information'
+        REAL_NAME: 'Real name'
+        LOCATION: 'Location'
+        COUNTRY: 'Country'
+        SAVE_CHANGES: 'Save changes'
+
+        AFTER_CHANGE_MESSAGE: 'Public information changed.'
+# In tooltip you can use HTML
+TOOLTIP:
+    2FA: '2fafa toltip'
+    REGISTER: 'register acc topt;tip'
+
+MAILER:
+    FAILED_TO_SEND_EMAIL: 'E-mail not send. Mailer failed.'
+    MAIL_NOT_VERIFIED: 'E-mail %mail% is not verified. E-mail "%title%" not send.'
+    TOO_MANY_MAILS_PER_MAIL_PER_HOUR: 'E-mail %mail% received too many e-mails in last hour. E-mail "%title%" not send.'
+    TOO_MANY_MAILS_PER_IP_PER_HOUR: 'Your IP (%ip%) received too many e-mails in last hour. E-mail "%title%" not send.'
+
+    CHANGED_PASSWORD_TITLE: 'Changed password to account'

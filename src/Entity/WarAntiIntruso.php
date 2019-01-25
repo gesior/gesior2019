@@ -69,5 +69,82 @@ class WarAntiIntruso
      */
     private $guildLose;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFragWin(): ?int
+    {
+        return $this->fragWin;
+    }
+
+    public function setFragWin(int $fragWin): self
+    {
+        $this->fragWin = $fragWin;
+
+        return $this;
+    }
+
+    public function getFragLose(): ?int
+    {
+        return $this->fragLose;
+    }
+
+    public function setFragLose(int $fragLose): self
+    {
+        $this->fragLose = $fragLose;
+
+        return $this;
+    }
+
+    public function getFragLimit(): ?int
+    {
+        return $this->fragLimit;
+    }
+
+    public function setFragLimit(int $fragLimit): self
+    {
+        $this->fragLimit = $fragLimit;
+
+        return $this;
+    }
+
+    public function getDate(): ?int
+    {
+        return $this->date;
+    }
+
+    public function setDate(int $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getGuildWin(): ?Guild
+    {
+        return $this->guildWin;
+    }
+
+    public function setGuildWin(?Guild $guildWin): self
+    {
+        $this->guildWin = $guildWin;
+
+        return $this;
+    }
+
+    public function getGuildLose(): ?Guild
+    {
+        return $this->guildLose;
+    }
+
+    public function setGuildLose(?Guild $guildLose): self
+    {
+        $this->guildLose = $guildLose;
+
+        return $this;
+    }
+
 
 }

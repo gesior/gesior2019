@@ -65,5 +65,77 @@ class AccountBan
      */
     private $bannedBy;
 
+    public function getReason(): ?string
+    {
+        return $this->reason;
+    }
+
+    public function setReason(string $reason): self
+    {
+        $this->reason = $reason;
+
+        return $this;
+    }
+
+    public function getBannedAt(): ?int
+    {
+        return $this->bannedAt;
+    }
+
+    public function setBannedAt(int $bannedAt): self
+    {
+        $this->bannedAt = $bannedAt;
+
+        return $this;
+    }
+
+    public function getExpiresAt(): ?int
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(int $expiresAt): self
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    public function getBanned(): ?Player
+    {
+        return $this->banned;
+    }
+
+    public function setBanned(?Player $banned): self
+    {
+        $this->banned = $banned;
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    public function getBannedBy(): ?Player
+    {
+        return $this->bannedBy;
+    }
+
+    public function setBannedBy(?Player $bannedBy): self
+    {
+        $this->bannedBy = $bannedBy;
+
+        return $this;
+    }
+
 
 }

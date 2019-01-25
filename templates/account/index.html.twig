@@ -1,20 +1,153 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My cool blog posts{% endblock %}
+{% block title %}Account Management{% endblock %}
 
 {% block body %}
-    <h2>{{ account.password }}</h2>
-    <p>{{ account.username }}</p>
 
-    {% if account %}
-        <a href="{{ url('security_logout') }}" class="btn btn-lg btn-primary" type="submit">
-            Logout
+    <div class="row">
+        <div class="col-12 text-right my-2">
+            Logged in as {{ account.username }}
+            <a class="btn btn-lg btn-primary" href="{{ url('security_logout') }}" type="submit">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th colspan="2">{{ 'ACCOUNT.INDEX.GENERAL_INFORMATION'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.ACCOUNT_NAME'|trans }}</td>
+            <td>{{ account.name }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.E_MAIL'|trans }}</td>
+            <td>{{ account.email }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.CREATED'|trans }}</td>
+            <td>{{ account.createDate|date('d F Y H:i') }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.LAST_LOGIN'|trans }}</td>
+            <td>{{ account.lastPremiumDaysUpdate|date('d F Y H:i') }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.REGISTERED'|trans }} {{ tooltip('TOOLTIP.REGISTER'|trans)|raw }}</td>
+            {% if account.key is not empty %}
+                <td>{{ 'Yes'|trans }}</td>
+            {% else %}
+                <td class="text-danger">
+                    {{ 'NO'|trans }}
+                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }} </a> )
+                </td>
+            {% endif %}
+        </tr>
+
+        <tr>
+            <td>{{ 'ACCOUNT.INDEX.2_STEP_VERIFICATION'|trans }} {{ tooltip('TOOLTIP.2FA'|trans)|raw }}</td>
+            {% if account.secret is not empty %}
+                <td>
+                    {{ 'Yes'|trans }}
+                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.DISABLE_2FA'|trans }} </a> )
+                </td>
+            {% else %}
+                <td class="text-danger">
+                    {{ 'NO'|trans }}
+                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.ENABLE_2FA'|trans }}</a> )
+                </td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_change_password') }}">
+        {{ 'ACCOUNT.INDEX.CHANGE_PASSWORD_BUTTON'|trans }}
+    </a>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_change_password') }}">
+        {{ 'ACCOUNT.INDEX.CHANGE_EMAIL_BUTTON'|trans }}
+    </a>
+
+    {% if account.key is not empty %}
+        <a class="btn btn-dark mx-2 my-2" href="{{ url('account_index') }}">
+            {{ 'ACCOUNT.INDEX.UNREGISTER_BUTTON'|trans }}
         </a>
-        Logged in as {{ account.username }}
     {% else %}
-        <a href="{{ url('security_login') }}" class="btn btn-lg btn-primary">
-            Login
+        <a class="btn btn-success mx-2 my-2" href="{{ url('account_index') }}">
+            {{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }}
         </a>
-        Not logged in
     {% endif %}
+
+
+    {% if account.secret is not empty %}
+        <a class="btn btn-dark mx-2 my-2" href="{{ url('account_index') }}">
+            {{ 'ACCOUNT.INDEX.2_STEP_VERIFICATION'|trans }} - {{ 'ACCOUNT.INDEX.DISABLE_2FA'|trans }}
+        </a>
+    {% else %}
+        <a class="btn btn-success mx-2 my-2" href="{{ url('account_index') }}">
+            {{ 'ACCOUNT.INDEX.2_STEP_VERIFICATION'|trans }} - {{ 'ACCOUNT.INDEX.ENABLE_2FA'|trans }}
+        </a>
+    {% endif %}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th colspan="2">Public Information</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Real name</td>
+            <td>{{ account.realName }}</td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>{{ account.location }}</td>
+        </tr>
+        <tr>
+            <td>Flag</td>
+            <td>{{ account.flag }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
+        {{ 'ACCOUNT.INDEX.EDIT_PUBLIC_INFORMATION'|trans }}
+    </a>
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th colspan="4">Characters</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for player in account %}
+        <tr>
+            <td>Real name</td>
+            <td>{{ account.realName }}</td>
+            <td>Real name</td>
+            <td>{{ account.realName }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
+        {{ 'ACCOUNT.INDEX.EDIT_PUBLIC_INFORMATION'|trans }}
+    </a>
 {% endblock %}

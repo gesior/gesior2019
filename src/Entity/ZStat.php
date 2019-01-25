@@ -84,5 +84,118 @@ class ZStat
      */
     private $spentSum;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDateStart(): ?int
+    {
+        return $this->dateStart;
+    }
+
+    public function setDateStart(int $dateStart): self
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?int
+    {
+        return $this->dateEnd;
+    }
+
+    public function setDateEnd(int $dateEnd): self
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    public function getPlayersMin(): ?int
+    {
+        return $this->playersMin;
+    }
+
+    public function setPlayersMin(int $playersMin): self
+    {
+        $this->playersMin = $playersMin;
+
+        return $this;
+    }
+
+    public function getPlayersAvg(): ?int
+    {
+        return $this->playersAvg;
+    }
+
+    public function setPlayersAvg(int $playersAvg): self
+    {
+        $this->playersAvg = $playersAvg;
+
+        return $this;
+    }
+
+    public function getPlayersMax(): ?int
+    {
+        return $this->playersMax;
+    }
+
+    public function setPlayersMax(int $playersMax): self
+    {
+        $this->playersMax = $playersMax;
+
+        return $this;
+    }
+
+    public function getPayCount(): ?int
+    {
+        return $this->payCount;
+    }
+
+    public function setPayCount(int $payCount): self
+    {
+        $this->payCount = $payCount;
+
+        return $this;
+    }
+
+    public function getPaySum(): ?int
+    {
+        return $this->paySum;
+    }
+
+    public function setPaySum(int $paySum): self
+    {
+        $this->paySum = $paySum;
+
+        return $this;
+    }
+
+    public function getSpentCount(): ?int
+    {
+        return $this->spentCount;
+    }
+
+    public function setSpentCount(int $spentCount): self
+    {
+        $this->spentCount = $spentCount;
+
+        return $this;
+    }
+
+    public function getSpentSum(): ?int
+    {
+        return $this->spentSum;
+    }
+
+    public function setSpentSum(int $spentSum): self
+    {
+        $this->spentSum = $spentSum;
+
+        return $this;
+    }
+
 
 }

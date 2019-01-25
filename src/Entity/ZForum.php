@@ -126,5 +126,190 @@ class ZForum
      */
     private $iconId = '0';
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFirstPost(): ?int
+    {
+        return $this->firstPost;
+    }
+
+    public function setFirstPost(int $firstPost): self
+    {
+        $this->firstPost = $firstPost;
+
+        return $this;
+    }
+
+    public function getLastPost(): ?int
+    {
+        return $this->lastPost;
+    }
+
+    public function setLastPost(int $lastPost): self
+    {
+        $this->lastPost = $lastPost;
+
+        return $this;
+    }
+
+    public function getSection(): ?int
+    {
+        return $this->section;
+    }
+
+    public function setSection(int $section): self
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    public function getReplies(): ?int
+    {
+        return $this->replies;
+    }
+
+    public function setReplies(int $replies): self
+    {
+        $this->replies = $replies;
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    public function getAuthorAid(): ?int
+    {
+        return $this->authorAid;
+    }
+
+    public function setAuthorAid(int $authorAid): self
+    {
+        $this->authorAid = $authorAid;
+
+        return $this;
+    }
+
+    public function getAuthorGuid(): ?int
+    {
+        return $this->authorGuid;
+    }
+
+    public function setAuthorGuid(int $authorGuid): self
+    {
+        $this->authorGuid = $authorGuid;
+
+        return $this;
+    }
+
+    public function getPostText(): ?string
+    {
+        return $this->postText;
+    }
+
+    public function setPostText(string $postText): self
+    {
+        $this->postText = $postText;
+
+        return $this;
+    }
+
+    public function getPostTopic(): ?string
+    {
+        return $this->postTopic;
+    }
+
+    public function setPostTopic(string $postTopic): self
+    {
+        $this->postTopic = $postTopic;
+
+        return $this;
+    }
+
+    public function getPostSmile(): ?bool
+    {
+        return $this->postSmile;
+    }
+
+    public function setPostSmile(bool $postSmile): self
+    {
+        $this->postSmile = $postSmile;
+
+        return $this;
+    }
+
+    public function getPostDate(): ?int
+    {
+        return $this->postDate;
+    }
+
+    public function setPostDate(int $postDate): self
+    {
+        $this->postDate = $postDate;
+
+        return $this;
+    }
+
+    public function getLastEditAid(): ?int
+    {
+        return $this->lastEditAid;
+    }
+
+    public function setLastEditAid(int $lastEditAid): self
+    {
+        $this->lastEditAid = $lastEditAid;
+
+        return $this;
+    }
+
+    public function getEditDate(): ?int
+    {
+        return $this->editDate;
+    }
+
+    public function setEditDate(int $editDate): self
+    {
+        $this->editDate = $editDate;
+
+        return $this;
+    }
+
+    public function getPostIp(): ?string
+    {
+        return $this->postIp;
+    }
+
+    public function setPostIp(string $postIp): self
+    {
+        $this->postIp = $postIp;
+
+        return $this;
+    }
+
+    public function getIconId(): ?int
+    {
+        return $this->iconId;
+    }
+
+    public function setIconId(int $iconId): self
+    {
+        $this->iconId = $iconId;
+
+        return $this;
+    }
+
 
 }

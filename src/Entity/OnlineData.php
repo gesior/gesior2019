@@ -43,5 +43,46 @@ class OnlineData
      */
     private $date;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getOnline(): ?int
+    {
+        return $this->online;
+    }
+
+    public function setOnline(int $online): self
+    {
+        $this->online = $online;
+
+        return $this;
+    }
+
+    public function getOnlineList(): ?int
+    {
+        return $this->onlineList;
+    }
+
+    public function setOnlineList(int $onlineList): self
+    {
+        $this->onlineList = $onlineList;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
 
 }

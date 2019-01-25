@@ -52,5 +52,58 @@ class CastleInfo
      */
     private $guild;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getGuildName(): ?string
+    {
+        return $this->guildName;
+    }
+
+    public function setGuildName(string $guildName): self
+    {
+        $this->guildName = $guildName;
+
+        return $this;
+    }
+
+    public function getTimestamp(): ?int
+    {
+        return $this->timestamp;
+    }
+
+    public function setTimestamp(int $timestamp): self
+    {
+        $this->timestamp = $timestamp;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getGuild(): ?Guild
+    {
+        return $this->guild;
+    }
+
+    public function setGuild(?Guild $guild): self
+    {
+        $this->guild = $guild;
+
+        return $this;
+    }
+
 
 }

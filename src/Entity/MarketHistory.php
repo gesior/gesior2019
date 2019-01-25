@@ -94,5 +94,130 @@ class MarketHistory
      */
     private $player;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getOfferId(): ?int
+    {
+        return $this->offerId;
+    }
+
+    public function setOfferId(int $offerId): self
+    {
+        $this->offerId = $offerId;
+
+        return $this;
+    }
+
+    public function getSale(): ?bool
+    {
+        return $this->sale;
+    }
+
+    public function setSale(bool $sale): self
+    {
+        $this->sale = $sale;
+
+        return $this;
+    }
+
+    public function getItemtype(): ?int
+    {
+        return $this->itemtype;
+    }
+
+    public function setItemtype(int $itemtype): self
+    {
+        $this->itemtype = $itemtype;
+
+        return $this;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->amount;
+    }
+
+    public function setAmount(int $amount): self
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getExpiresAt(): ?int
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(int $expiresAt): self
+    {
+        $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    public function getInserted(): ?int
+    {
+        return $this->inserted;
+    }
+
+    public function setInserted(int $inserted): self
+    {
+        $this->inserted = $inserted;
+
+        return $this;
+    }
+
+    public function getState(): ?bool
+    {
+        return $this->state;
+    }
+
+    public function setState(bool $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getFromWorld(): ?int
+    {
+        return $this->fromWorld;
+    }
+
+    public function setFromWorld(int $fromWorld): self
+    {
+        $this->fromWorld = $fromWorld;
+
+        return $this;
+    }
+
+    public function getPlayer(): ?Player
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(?Player $player): self
+    {
+        $this->player = $player;
+
+        return $this;
+    }
+
 
 }

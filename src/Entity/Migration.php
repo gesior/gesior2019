@@ -35,5 +35,34 @@ class Migration
      */
     private $batch;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getMigration(): ?string
+    {
+        return $this->migration;
+    }
+
+    public function setMigration(string $migration): self
+    {
+        $this->migration = $migration;
+
+        return $this;
+    }
+
+    public function getBatch(): ?int
+    {
+        return $this->batch;
+    }
+
+    public function setBatch(int $batch): self
+    {
+        $this->batch = $batch;
+
+        return $this;
+    }
+
 
 }
