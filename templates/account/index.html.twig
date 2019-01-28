@@ -137,17 +137,30 @@
         </tr>
         </thead>
         <tbody>
-        {% for player in account %}
+        {% for player in account.players %}
         <tr>
-            <td>Real name</td>
-            <td>{{ account.realName }}</td>
-            <td>Real name</td>
-            <td>{{ account.realName }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.level }} {{ player.vocation|vocationName }}</td>
+            <td>{{ player|playerOnlineStatus }}</td>
+            <td><a class="btn btn-sm btn-primary py-0 my-0" href="{{ url('account_character_edit', {'id':player.id}) }}">Edit</a></td>
         </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">You got no characters yet.</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
     <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
-        {{ 'ACCOUNT.INDEX.EDIT_PUBLIC_INFORMATION'|trans }}
+        {{ 'ACCOUNT.INDEX.CREATE_CHARACTER'|trans }}
+    </a>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
+        {{ 'ACCOUNT.INDEX.DELETE_CHARACTER'|trans }}
+    </a>
+
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
+        {{ 'ACCOUNT.INDEX.UNDELETE_CHARACTER'|trans }}
     </a>
 {% endblock %}

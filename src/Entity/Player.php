@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Players
@@ -424,7 +426,9 @@ class Player
     /**
      * @var string|null
      *
+     * @Assert\Length(max=2000)
      * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
+     *
      */
     private $comment;
 
@@ -732,7 +736,7 @@ class Player
     /**
      * @var Account
      *
-     * @ORM\ManyToOne(targetEntity="Account")
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="players")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="account_id", referencedColumnName="id")
      * })
@@ -740,7 +744,7 @@ class Player
     private $account;
 
     /**
-     * @var Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Guild", inversedBy="player")
      * @ORM\JoinTable(name="guild_invites",
@@ -759,7 +763,7 @@ class Player
      */
     public function __construct()
     {
-        $this->guild = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->guild = new ArrayCollection();
     }
 
     public function getId(): ?int

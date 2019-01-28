@@ -22,13 +22,13 @@ Test translation: {{ "test"|trans }}
 <hr/>
 <div class="container">
     {% for flashMessage in app.session.flashbag.get('error') %}
-        <div class="alert alert-danger">{{ flashMessage|trans }}</div>
+        <div class="alert alert-danger">{{ flashMessage }}</div>
     {% endfor %}
     {% for flashMessage in app.session.flashbag.get('warning') %}
-        <div class="alert alert-warning">{{ flashMessage|trans }}</div>
+        <div class="alert alert-warning">{{ flashMessage }}</div>
     {% endfor %}
     {% for flashMessage in app.session.flashbag.get('success') %}
-        <div class="alert alert-success">{{ flashMessage|trans }}</div>
+        <div class="alert alert-success">{{ flashMessage }}</div>
     {% endfor %}
     {% block body %}{% endblock %}
 </div>

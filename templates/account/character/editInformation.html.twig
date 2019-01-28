@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ACCOUNT.CHARACTER.EDIT_INFORMATION.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+    <a href="{{ url('account_index') }}" class="btn btn-sm btn-warning">
+        {{ 'Back'|trans }}
+    </a>
+
+    <h2>{{ 'ACCOUNT.CHARACTER.EDIT_INFORMATION.TITLE'|trans }}: {{ player.name }}</h2>
+
+    {{ form(form) }}
+
+{% endblock %}

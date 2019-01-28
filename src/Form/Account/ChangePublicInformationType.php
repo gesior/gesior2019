@@ -11,10 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChangePublicInformationType extends AbstractType
 {
-    public function __construct(\Twig_Environment $environment)
-    {
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
