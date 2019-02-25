@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Players
  *
  * @ORM\Table(name="players", uniqueConstraints={@ORM\UniqueConstraint(name="name", columns={"name"})}, indexes={@ORM\Index(name="account_id", columns={"account_id"}), @ORM\Index(name="vocation", columns={"vocation"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Player
 {
@@ -746,7 +748,7 @@ class Player
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Guild", inversedBy="player")
+     * @ORM\ManyToMany(targetEntity="Guild", inversedBy="playersInvited")
      * @ORM\JoinTable(name="guild_invites",
      *   joinColumns={
      *     @ORM\JoinColumn(name="player_id", referencedColumnName="id")
@@ -756,14 +758,14 @@ class Player
      *   }
      * )
      */
-    private $guild;
+    private $guildInvites;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->guild = new ArrayCollection();
+        $this->guildInvites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1926,27 +1928,34 @@ class Player
     /**
      * @return Collection|Guild[]
      */
-    public function getGuild(): Collection
+    public function getGuildInvites(): Collection
     {
-        return $this->guild;
+        return $this->guildInvites;
     }
 
-    public function addGuild(Guild $guild): self
+    public function addGuildInvites(Guild $guild): self
     {
-        if (!$this->guild->contains($guild)) {
-            $this->guild[] = $guild;
+        if (!$this->guildInvites->contains($guild)) {
+            $this->guildInvites[] = $guild;
         }
 
         return $this;
     }
 
-    public function removeGuild(Guild $guild): self
+    public function removeGuildInvites(Guild $guild): self
     {
-        if ($this->guild->contains($guild)) {
-            $this->guild->removeElement($guild);
+        if ($this->guildInvites->contains($guild)) {
+            $this->guildInvites->removeElement($guild);
         }
 
         return $this;
     }
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setCreateDate(time());
+    }
 }

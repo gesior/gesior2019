@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Accounts
  *
  * @ORM\Table(name="accounts", uniqueConstraints={@ORM\UniqueConstraint(name="name_2", columns={"name"}), @ORM\UniqueConstraint(name="name", columns={"name"}), @ORM\UniqueConstraint(name="name_3", columns={"name"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AccountRepository")
  */
 class Account implements UserInterface
 {
@@ -455,4 +455,5 @@ class Account implements UserInterface
 
         return $this;
     }
+
 }

@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Player;
 use App\Form\Account\ChangePasswordModel;
 use App\Form\Account\ChangePasswordType;
 use App\Form\Account\ChangePublicInformationType;
-use App\Form\Account\Character\EditInformationType;
+use App\Form\Account\CreateAccountModel;
+use App\Form\Account\CreateAccountType;
 use App\Security\OtsSecurityService;
 use App\Service\AccountService;
 use App\Service\MailerService;
 use App\Service\TranslatorTrait;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use LogicException;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,10 +31,13 @@ class AccountController extends AbstractOtsController
     private $mailerService;
     private $translator;
 
-    public function __construct(EntityManagerInterface $entityManager, AccountService $accountService,
-                                OtsSecurityService $otsSecurityService, MailerService $mailerService,
-                                TranslatorInterface $translator)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        AccountService $accountService,
+        OtsSecurityService $otsSecurityService,
+        MailerService $mailerService,
+        TranslatorInterface $translator
+    ) {
         $this->entityManager = $entityManager;
         $this->accountService = $accountService;
         $this->otsSecurityService = $otsSecurityService;
@@ -53,6 +57,8 @@ class AccountController extends AbstractOtsController
 
     /**
      * @Route("/account/changePassword", name="account_change_password")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function changePassword(Request $request)
     {
@@ -107,7 +113,11 @@ class AccountController extends AbstractOtsController
             $this->entityManager->persist($account);
             $this->entityManager->flush();
 
-            $this->addFlash('success', $this->translate('ACCOUNT.CHANGE_PUBLIC_INFORMATION.AFTER_CHANGE_MESSAGE'));
+            $this->addFlash(
+                'success',
+                $this->translate('ACCOUNT.CHANGE_PUBLIC_INFORMATION.AFTER_CHANGE_MESSAGE')
+            );
+
             return $this->redirectToRoute('account_index');
         }
 
@@ -117,34 +127,43 @@ class AccountController extends AbstractOtsController
     }
 
     /**
-     * @Route("/account/character/editInformation/{id}", name="account_character_edit")
-     * @param Player $player
+     * @Route("/account/create", name="account_create")
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function characterEdit(Request $request, Player $player)
+    public function createAccount(Request $request)
     {
-        if ($this->getAccount() !== $player->getAccount()) {
-            $this->addFlash('error', $this->translate('ACCOUNT.CHARACTER.EDIT_INFORMATION.CHARACTER_FROM_OTHER_ACCOUNT'));
-            return $this->redirectToRoute('account_index');
-        }
-
-        $form = $this->createForm(EditInformationType::class, $player);
+        $accountModel = new CreateAccountModel();
+        $form = $this->createForm(CreateAccountType::class, $accountModel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($player);
-            $this->entityManager->flush();
+            try {
+                $newPlayer = $this->accountService->createAccount(
 
-            $this->addFlash('success',
-                $this->translate('ACCOUNT.CHARACTER.EDIT_INFORMATION.AFTER_CHANGE_MESSAGE', ['%name%' => $player->getName()])
-            );
-            return $this->redirectToRoute('account_index');
+                    $accountModel->getName(),
+                    $accountModel->getSex(),
+                    $accountModel->getVocationId(),
+                    $accountModel->getTownId()
+                );
+
+                $this->entityManager->persist($newPlayer);
+                $this->entityManager->flush();
+
+                $this->addFlash('success',
+                    $this->translate('ACCOUNT.CREATE.AFTER_CREATE_MESSAGE',
+                        ['%name%' => $newPlayer->getName()])
+                );
+                return $this->redirectToRoute('account_index');
+            } catch (Exception $createAccountException) {
+                $form->addError(new FormError($createAccountException->getMessage()));
+            }
         }
 
-        return $this->render('account/character/editInformation.html.twig', [
-            'form' => $form->createView(),
-            'player' => $player
+        return $this->render('account/create.html.twig', [
+            'form' => $form->createView()
         ]);
+
     }
+
 }

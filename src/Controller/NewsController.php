@@ -15,6 +15,12 @@ class NewsController extends AbstractController
     {
         /** @var Account $account */
         $account = $this->getUser();
-        return $this->render('news/index.html.twig', ['account' => $account]);
+
+        return $this->render(
+            'news/index.html.twig',
+            [
+                'account' => $account,
+            ]
+        );
     }
 }

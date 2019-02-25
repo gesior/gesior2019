@@ -1,13 +1,62 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
-{% form_theme form_login 'bootstrap_4_horizontal_layout.html.twig' %}
+
 {% block body %}
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {{ form(form_login) }}
+    {{ form(form) }}
 
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        function initLoginForm(loginNameField, secureTokenField, messageTokenTypeAccountName, messageTokenRequired, messageTokenNotRequired) {
+            let lastUsername = loginNameField.val();
+            loginNameField.change(updateLoginFormSecureTokenField);
+            updateLoginFormSecureTokenField(true);
+
+            function updateLoginFormSecureTokenField(force = false) {
+                let currentLoginName = loginNameField.val();
+
+                if (force || lastUsername !== currentLoginName) {
+                    lastUsername = currentLoginName;
+                    if (currentLoginName !== '') {
+                        $.getJSON("{{ url('security_is_token_required') }}", {accountName: currentLoginName})
+                            .done(
+                                function (response) {
+                                    if (response.tokenRequired) {
+                                        secureTokenField.removeAttr('disabled');
+                                        secureTokenField.attr('placeholder', messageTokenRequired);
+                                        secureTokenField.removeClass('is-valid');
+                                    } else {
+                                        secureTokenField.attr('disabled', true);
+                                        secureTokenField.attr('placeholder', messageTokenNotRequired);
+                                        secureTokenField.addClass('is-valid');
+                                    }
+                                    console.log(response, secureTokenField);
+                                }
+                            );
+                    } else {
+                        secureTokenField.attr('disabled', true);
+                        secureTokenField.attr('placeholder', messageTokenTypeAccountName);
+                    }
+                }
+            }
+        }
+
+        let messageTokenTypeAccountName = "{{ 'SECURITY.LOGIN.TOKEN_REQUIRES_ACCOUNT_NAME'|trans }}";
+        let messageTokenRequired = "{{ 'SECURITY.LOGIN.TOKEN_REQUIRED'|trans }}";
+        let messageTokenNotRequired = "{{ 'SECURITY.LOGIN.TOKEN_NOT_REQUIRED'|trans }}";
+
+        let loginNameField = $('#{{ form.children['name'].vars.id }}');
+        let secureTokenField = $('#{{ form.children['secure_token'].vars.id }}');
+
+        initLoginForm(loginNameField, secureTokenField, messageTokenTypeAccountName, messageTokenRequired, messageTokenNotRequired);
+
+        console.log('2');
+    </script>
 {% endblock %}

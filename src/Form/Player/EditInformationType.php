@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Account\Character;
+namespace App\Form\Player;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,22 +15,29 @@ class EditInformationType extends AbstractType
     {
         $builder
             ->add('hideChar', ChoiceType::class, [
-                'label' => 'ACCOUNT.CHARACTER.EDIT_INFORMATION.HIDE_CHARACTER',
-                'choices' => ['No' => 0, 'Yes' => 1]
+                'label' => 'PLAYER.EDIT_INFORMATION.HIDE_PLAYER',
+                'choices' => [
+                    'No' => 0,
+                    'Yes' => 1,
+                ],
             ])
             ->add('comment', TextareaType::class, [
-                'label' => 'ACCOUNT.CHARACTER.EDIT_INFORMATION.COMMENT',
-                'attr' => ['autocomplete' => 'off'], 'required' => false, 'empty_data' => ''
+                'label' => 'PLAYER.EDIT_INFORMATION.COMMENT',
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+                'required' => false,
+                'empty_data' => '',
             ])
             ->add('saveChanges', SubmitType::class, [
-                'label' => 'ACCOUNT.CHARACTER.EDIT_INFORMATION.SAVE_CHANGES'
+                'label' => 'PLAYER.EDIT_INFORMATION.SAVE_CHANGES',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'csrf_protection' => true
+            'csrf_protection' => true,
         ]);
     }
 }

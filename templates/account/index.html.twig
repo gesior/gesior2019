@@ -46,7 +46,7 @@
             {% else %}
                 <td class="text-danger">
                     {{ 'NO'|trans }}
-                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }} </a> )
+                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }}  sads asd as  dsa dasdas das  dasdas as das</a> )
                 </td>
             {% endif %}
         </tr>
@@ -138,12 +138,13 @@
         </thead>
         <tbody>
         {% for player in account.players %}
-        <tr>
-            <td>{{ player.name }}</td>
-            <td>{{ player.level }} {{ player.vocation|vocationName }}</td>
-            <td>{{ player|playerOnlineStatus }}</td>
-            <td><a class="btn btn-sm btn-primary py-0 my-0" href="{{ url('account_character_edit', {'id':player.id}) }}">Edit</a></td>
-        </tr>
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>{{ player.level }} {{ player.vocation|vocationName }}</td>
+                <td>{{ player|playerOnlineStatus }}</td>
+                <td><a class="btn btn-sm btn-primary py-0 my-0"
+                       href="{{ url('player_edit', {'id':player.id}) }}">Edit</a></td>
+            </tr>
         {% else %}
             <tr>
                 <td colspan="4">You got no characters yet.</td>
@@ -152,15 +153,15 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
-        {{ 'ACCOUNT.INDEX.CREATE_CHARACTER'|trans }}
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('player_create') }}">
+        {{ 'ACCOUNT.INDEX.CREATE_PLAYER'|trans }}
     </a>
 
-    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
-        {{ 'ACCOUNT.INDEX.DELETE_CHARACTER'|trans }}
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('player_delete') }}">
+        {{ 'ACCOUNT.INDEX.DELETE_PLAYER'|trans }}
     </a>
 
-    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_public_information') }}">
-        {{ 'ACCOUNT.INDEX.UNDELETE_CHARACTER'|trans }}
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('player_undelete') }}">
+        {{ 'ACCOUNT.INDEX.UNDELETE_PLAYER'|trans }}
     </a>
 {% endblock %}

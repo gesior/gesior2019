@@ -8,14 +8,14 @@
     <script src="{{ asset('build/runtime.js') }}"></script>
     {% block stylesheets %}{% endblock %}
 </head>
-{% if form is defined %}
-    {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
-{% endif %}
+
 <body>
 Current: {{ app.request.locale|upper }}<br/>
 Change:
+{% set currentRoute = app.request.attributes.get('_route') %}
+{% set routeParams = app.request.attributes.get('_route_params')|merge(app.request.query.all) %}
 {% for local in available_locales %}
-    <a href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)|merge({'_locale': local})) }}">{{ local|upper }}</a>
+    <a href="{{ url(currentRoute, routeParams|merge({'_locale': local})) }}">{{ local|upper }}</a>
 {% endfor %}
 <br/>
 Test translation: {{ "test"|trans }}

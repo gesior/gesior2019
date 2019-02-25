@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'PLAYER.CREATE.TITLE'|trans }}{% endblock %}
+
+{% form_theme form 'forms/vocationPicker.html.twig' %}
+
+{% block body %}
+    <a href="{{ url('account_index') }}" class="btn btn-sm btn-warning">
+        {{ 'Back'|trans }}
+    </a>
+
+    <h2>{{ 'PLAYER.CREATE.TITLE'|trans }}</h2>
+
+    {{ form(form) }}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        function initCreateCharacterForm(playerNameField, playerNameHelperBox, messageEmptyPlayerName) {
+            let lastPlayerName = playerNameField.val();
+            playerNameField.change(updatePlayerNameStatus);
+            playerNameField.keyup(updatePlayerNameStatus);
+            playerNameField.blur(updatePlayerNameOnBlur);
+            updatePlayerNameStatus(true);
+
+            function updatePlayerNameStatus() {
+                let currentPlayerName = playerNameField.val();
+
+                if (lastPlayerName !== currentPlayerName) {
+                    lastPlayerName = currentPlayerName;
+                    if (currentPlayerName !== '') {
+                        $.getJSON("{{ url('player_new_name_test') }}", {playerName: currentPlayerName})
+                            .done(
+                                function (response) {
+                                    if (response.error) {
+                                        playerNameHelperBox.text(response.error);
+                                        playerNameField.removeClass('is-valid');
+                                        playerNameField.addClass('is-invalid');
+                                    } else {
+                                        playerNameHelperBox.text(response.formattedName);
+                                        playerNameField.addClass('is-valid');
+                                        playerNameField.removeClass('is-invalid');
+                                        playerNameField.data('last-valid-name', response.formattedName);
+                                    }
+                                }
+                            );
+                    } else {
+                        playerNameHelperBox.html(messageEmptyPlayerName);
+                        playerNameField.removeClass('is-valid');
+                        playerNameField.removeClass('is-invalid');
+                    }
+                }
+            }
+
+            function updatePlayerNameOnBlur() {
+                if (playerNameField.hasClass('is-valid') && playerNameField.data('last-valid-name')) {
+                    playerNameField.val(playerNameField.data('last-valid-name'));
+                }
+            }
+        }
+
+        const messageEmptyPlayerName = "{{ 'PLAYER.NAME.EMPTY_PLAYER_NAME'|trans }}";
+
+        let playerNameField = $('#{{ form.children['name'].vars.id }}');
+        let playerNameHelperBox = $('.player-name-helper');
+
+        initCreateCharacterForm(playerNameField, playerNameHelperBox, messageEmptyPlayerName);
+
+        console.log('2');
+    </script>
+{% endblock %}

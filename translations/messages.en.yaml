@@ -31,9 +31,9 @@ ACCOUNT:
         UNREGISTER_BUTTON: 'Unregister - remove Recovery Key'
         PUBLIC_INFORMATION_ACTIONS: 'Edit:'
         EDIT_PUBLIC_INFORMATION: 'Change Public Information'
-        CREATE_CHARACTER: 'Create Character'
-        DELETE_CHARACTER: 'Delete Character'
-        UNDELETE_CHARACTER: 'Undelete Character'
+        CREATE_PLAYER: 'Create Character'
+        DELETE_PLAYER: 'Delete Character'
+        UNDELETE_PLAYER: 'Undelete Character'
 
     CHANGE_PASSWORD:
         TITLE: 'Change Password'
@@ -57,16 +57,36 @@ ACCOUNT:
 
         AFTER_CHANGE_MESSAGE: 'Update Public information.'
 
-    CHARACTER:
-        EDIT_INFORMATION:
-            TITLE: 'Edit Character Information'
-            HIDE_CHARACTER: 'Hide account information'
-            COMMENT: 'Comment'
-            SAVE_CHANGES: 'Save Changes'
-            CHARACTER_FROM_OTHER_ACCOUNT: 'Cannot edit character from other account.'
+PLAYER:
+    SEX_MALE: Male
+    SEX_FEMALE: Female
 
-            AFTER_CHANGE_MESSAGE: 'Updated information about player %name%.'
+    NAME:
+        EMPTY_PLAYER_NAME: 'Name cannot be empty. Type some letters :)'
+        TOO_SHORT: 'Invalid name format. Name is too short. Minimum length is %min%.'
+        TOO_LONG: 'Invalid name format. Name is too long. Maximum length is %min%.'
+        BLOCKED_CHARACTER: 'Invalid name format. Name contains not allowed character: %value% , allowed characters: %rule%'
+        BLOCKED_NAME: 'Invalid name format. Blocked name: %rule%'
+        INVALID_FIRST_WORD: 'Invalid name format. Blocked first word: %rule%'
+        BLOCKED_LAST_WORD: 'Invalid name format. Blocked last word: %rule%'
+        BLOCKED_WORD: 'Invalid name format. Blocked word/letters combination: %rule%'
+        MAXIMUM_LETTER_COUNT: 'Invalid name format. Too many letters: %letter% , limit is: %limit%'
+        MAXIMUM_SAME_LETTER_SEQUENCE_LENGTH: 'Invalid name format. Too long same letter sequence: %letter% , limit is: %limit%'
 
+    CREATE:
+        NAME: Name
+        SEX: Sex
+        VOCATION: Vocation
+        TOWN: Town
+
+    EDIT_INFORMATION:
+        TITLE: 'Edit Character Information'
+        HIDE_PLAYER: 'Hide account information'
+        COMMENT: 'Comment'
+        SAVE_CHANGES: 'Save Changes'
+        PLAYER_FROM_OTHER_ACCOUNT: 'Cannot edit character from other account.'
+
+        AFTER_CHANGE_MESSAGE: 'Updated information about player %name%.'
 # In tooltip you can use HTML
 TOOLTIP:
     2FA: '2fafa toltip'
@@ -79,3 +99,7 @@ MAILER:
     TOO_MANY_MAILS_PER_IP_PER_HOUR: 'Your IP (%ip%) received too many e-mails in last hour. E-mail "%title%" not send.'
 
     CHANGED_PASSWORD_TITLE: 'Changed password to account'
+
+SECURITY:
+    LOGIN:
+        LOGIN_BUTTON: 'messages'

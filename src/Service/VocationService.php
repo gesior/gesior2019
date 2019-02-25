@@ -4,8 +4,6 @@ namespace App\Service;
 
 class VocationService
 {
-    use TranslatorTrait;
-
     const BUGGED_VOCATION_NAME = 'BUGGED VOCATION ID!';
 
     private static $vocationNames = [

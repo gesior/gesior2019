@@ -1,0 +1,15 @@
+
+{% block vocation_picker_widget -%}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            {% with child.vars %}
+            {{ block("vocation_picker_choice") }}
+            {% endwith %}
+        {% endfor -%}
+    </div>
+{%- endblock vocation_picker_widget %}
+
+{% block vocation_picker_choice -%}
+    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    <label for="{{ id }}">{{ label }}</label>
+{%- endblock vocation_picker_choice %}

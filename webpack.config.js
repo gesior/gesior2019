@@ -4,7 +4,7 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/prv/masteria/symfony/public/build')
+    .setPublicPath('/prv/Masteria2019/public/build')
     // only needed for CDN's or sub-directory deploy
     .setManifestKeyPrefix('build/')
 

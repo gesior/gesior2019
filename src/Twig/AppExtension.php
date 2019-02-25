@@ -56,7 +56,7 @@ class AppExtension extends AbstractExtension
 
     public function playerOnlineStatus(Player $player)
     {
-        return $this>$this->isPlayerOnline($player) ? 'CHARACTER.ONLINE' : 'CHARACTER.OFFLINE';
+        return $this>$this->isPlayerOnline($player) ? 'PLAYER.ONLINE' : 'PLAYER.OFFLINE';
     }
 
     public function townName(string $townId)

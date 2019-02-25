@@ -97,18 +97,18 @@ class Guild
     private $ownerid;
 
     /**
-     * @var Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Player", mappedBy="guild")
+     * @ORM\ManyToMany(targetEntity="Player", mappedBy="guildInvites")
      */
-    private $player;
+    private $playersInvited;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->player = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->playersInvited = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -239,26 +239,26 @@ class Guild
     /**
      * @return Collection|Player[]
      */
-    public function getPlayer(): Collection
+    public function getPlayersInvited(): Collection
     {
-        return $this->player;
+        return $this->playersInvited;
     }
 
-    public function addPlayer(Player $player): self
+    public function addPlayerInvited(Player $player): self
     {
-        if (!$this->player->contains($player)) {
-            $this->player[] = $player;
-            $player->addGuild($this);
+        if (!$this->playersInvited->contains($player)) {
+            $this->playersInvited[] = $player;
+            $player->addGuildInvites($this);
         }
 
         return $this;
     }
 
-    public function removePlayer(Player $player): self
+    public function removePlayerInvited(Player $player): self
     {
-        if ($this->player->contains($player)) {
-            $this->player->removeElement($player);
-            $player->removeGuild($this);
+        if ($this->playersInvited->contains($player)) {
+            $this->playersInvited->removeElement($player);
+            $player->removeGuildInvites($this);
         }
 
         return $this;

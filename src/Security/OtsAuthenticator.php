@@ -23,14 +23,19 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
+    const LOGIN_ROUTE = 'security_login';
+
     private $entityManager;
     private $router;
     private $csrfTokenManager;
     private $otsSecurityService;
 
-    public function __construct(EntityManagerInterface $entityManager, RouterInterface $router,
-                                CsrfTokenManagerInterface $csrfTokenManager, OtsSecurityService $otsSecurityService)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        RouterInterface $router,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        OtsSecurityService $otsSecurityService
+    ) {
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -39,8 +44,7 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'security_login' === $request->attributes->get('_route')
-            && $request->isMethod('POST');
+        return self::LOGIN_ROUTE === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
@@ -50,6 +54,7 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             'name' => $loginFormData['name'],
             'password' => $loginFormData['password'],
+            'secure_token' => isset($loginFormData['secure_token']) ? $loginFormData['secure_token'] : '',
             'csrf_token' => $loginFormData['_token'],
             'ip' => $request->getClientIp(),
         ];
@@ -80,13 +85,13 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Account::class)->findOneBy(['name' => $credentials['name']]);
+        $user = $userProvider->loadUserByUsername($credentials['name']);
+        //$user = $this->entityManager->getRepository(Account::class)->findOneBy(['name' => $credentials['name']]);
 
         if (!$user) {
             // invalid username IP log
             throw new BadCredentialsException();
         }
-
 
         return $user;
     }
@@ -95,12 +100,21 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
     {
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
+        $isTokenValid = $this->otsSecurityService->isValidToken($user, $credentials['secure_token']);
+
+        if (!$isTokenValid) {
+            // invalid token IP log
+            // invalid token account log
+            return $isTokenValid;
+        }
+
         $isPasswordValid = $this->otsSecurityService->isValidPassword($user, $credentials['password']);
 
         if (!$isPasswordValid) {
             // invalid password IP log
             // invalid password account log
         }
+
         return $isPasswordValid;
     }
 
@@ -113,8 +127,8 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->router->generate('account_index'));
     }
 
-    protected function getLoginUrl()
+    public function getLoginUrl()
     {
-        return $this->router->generate('security_login');
+        return $this->router->generate(self::LOGIN_ROUTE);
     }
 }

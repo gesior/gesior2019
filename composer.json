@@ -1,5 +1,5 @@
 {
-    "name": "Masteria2019",
+    "name": "gesior/masteria2019",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -9,6 +9,7 @@
         "doctrine/annotations": "^1.6",
         "excelwebzone/recaptcha-bundle": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
+        "sonata-project/google-authenticator": "^2.2",
         "symfony/apache-pack": "^1.0",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",

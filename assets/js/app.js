@@ -11,5 +11,5 @@ console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
 
-
 require('./enable-bootstrap-tooltip.js');
+require('./export-jquery-to-global.js');

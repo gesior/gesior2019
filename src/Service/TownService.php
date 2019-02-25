@@ -2,17 +2,13 @@
 
 namespace App\Service;
 
-use Symfony\Contracts\Translation\TranslatorInterface;
-
 class TownService
 {
-    use TranslatorTrait;
-
     const BUGGED_TOWN_NAME = 'BUGGED TOWN ID!';
     private static $towns = [
-        1 => 'Ab',
-        2 => 'car',
-        3 => 'thais',
+        1 => 'Rookgaard',
+        2 => 'Carlin',
+        3 => 'Thais',
     ];
 
     public function getTowns()

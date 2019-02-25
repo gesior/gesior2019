@@ -16,25 +16,38 @@ class ChangePublicInformationType extends AbstractType
         $builder
             ->add('realName', TextType::class, [
                 'label' => 'ACCOUNT.CHANGE_PUBLIC_INFORMATION.REAL_NAME',
-                'attr' => ['autocomplete' => 'off'], 'required' => false, 'empty_data' => ''
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+                'required' => false,
+                'empty_data' => '',
             ])
             ->add('location', TextType::class, [
                 'label' => 'ACCOUNT.CHANGE_PUBLIC_INFORMATION.LOCATION',
-                'attr' => ['autocomplete' => 'off'], 'required' => false, 'empty_data' => ''
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
+                'required' => false,
+                'empty_data' => '',
             ])
             ->add('flag', ChoiceType::class, [
                 'label' => 'ACCOUNT.CHANGE_PUBLIC_INFORMATION.COUNTRY',
-                'choices' => ['Ukraine' => 'ua', 'Poland' => 'pl', 'Germany' => 'de', 'Brazil' => 'br']
+                'choices' => [
+                    'Ukraine' => 'ua',
+                    'Poland' => 'pl',
+                    'Germany' => 'de',
+                    'Brazil' => 'br',
+                ],
             ])
             ->add('changePassword', SubmitType::class, [
-                'label' => 'ACCOUNT.CHANGE_PUBLIC_INFORMATION.SAVE_CHANGES'
+                'label' => 'ACCOUNT.CHANGE_PUBLIC_INFORMATION.SAVE_CHANGES',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'csrf_protection' => true
+            'csrf_protection' => true,
         ]);
     }
 }
