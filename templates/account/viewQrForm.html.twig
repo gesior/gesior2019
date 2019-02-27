@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ACCOUNT.VIEW_QR.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+    <a href="{{ url('account_index') }}" class="btn btn-sm btn-warning">
+        {{ 'Back'|trans }}
+    </a>
+
+    <h2>{{ 'ACCOUNT.VIEW_QR.TITLE'|trans }}</h2>
+
+    {{ form(form) }}
+
+{% endblock %}

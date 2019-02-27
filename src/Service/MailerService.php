@@ -31,12 +31,19 @@ class MailerService
     private $infoMailsPerIpPerHour;
     private $securityMailsPerIpPerHour;
 
-    public function __construct(EntityManagerInterface $entityManager, Swift_Mailer $swiftMailer,
-                                Twig_Environment $templating, TranslatorInterface $translator,
-                                RequestStack $requestStack, string $fromAddress, string $mailTitlePrefix,
-                                $infoMailsPerMailPerHour, $securityMailsPerMailPerHour,
-                                $infoMailsPerIpPerHour, $securityMailsPerIpPerHour)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        Swift_Mailer $swiftMailer,
+        Twig_Environment $templating,
+        TranslatorInterface $translator,
+        RequestStack $requestStack,
+        string $fromAddress,
+        string $mailTitlePrefix,
+        $infoMailsPerMailPerHour,
+        $securityMailsPerMailPerHour,
+        $infoMailsPerIpPerHour,
+        $securityMailsPerIpPerHour
+    ) {
         $this->entityManager = $entityManager;
         $this->swiftMailer = $swiftMailer;
         $this->templating = $templating;
@@ -147,6 +154,33 @@ class MailerService
     {
         $message = $this->createMessage($account, 'MAILER.CHANGED_PASSWORD_TITLE', self::MAIL_TYPE_INFO);
         $message->setBody('test ' . $newPassword);
+
+        if ($this->swiftMailer->send($message) == 0) {
+            throw new LogicException($this->translator->trans('MAILER.FAILED_TO_SEND_EMAIL'));
+        }
+    }
+
+    /**
+     * @param Account $account
+     */
+    public function sendEnable2FA(Account $account)
+    {
+        $message = $this->createMessage($account, 'MAILER.ENABLE_2FA_TITLE', self::MAIL_TYPE_INFO);
+        $message->setBody('test ' . $account->getSecret());
+
+        // TODO: attach QR image
+        if ($this->swiftMailer->send($message) == 0) {
+            throw new LogicException($this->translator->trans('MAILER.FAILED_TO_SEND_EMAIL'));
+        }
+    }
+
+    /**
+     * @param Account $account
+     */
+    public function sendDisable2FA(Account $account)
+    {
+        $message = $this->createMessage($account, 'MAILER.DISABLE_2FA_TITLE', self::MAIL_TYPE_INFO);
+        $message->setBody('test ' . $account->getSecret());
 
         if ($this->swiftMailer->send($message) == 0) {
             throw new LogicException($this->translator->trans('MAILER.FAILED_TO_SEND_EMAIL'));

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+
 class VocationService
 {
     const BUGGED_VOCATION_NAME = 'BUGGED VOCATION ID!';

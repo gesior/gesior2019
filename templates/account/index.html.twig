@@ -46,7 +46,8 @@
             {% else %}
                 <td class="text-danger">
                     {{ 'NO'|trans }}
-                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }}  sads asd as  dsa dasdas das  dasdas as das</a> )
+                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.REGISTER_BUTTON'|trans }} sads asd as dsa
+                        dasdas das dasdas as das</a> )
                 </td>
             {% endif %}
         </tr>
@@ -56,12 +57,15 @@
             {% if account.secret is not empty %}
                 <td>
                     {{ 'Yes'|trans }}
-                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.DISABLE_2FA'|trans }} </a> )
+                    ( <a href="{{ url('account_disable2FA') }}">{{ 'ACCOUNT.INDEX.DISABLE_2FA'|trans }} </a> )
+                    <a class="btn btn-sm btn-success" href="{{ url('account_viewQrCode') }}">
+                        {{ 'ACCOUNT.INDEX.VIEW_QR_CODE'|trans }}
+                    </a>
                 </td>
             {% else %}
                 <td class="text-danger">
                     {{ 'NO'|trans }}
-                    ( <a href="{{ url('account_index') }}">{{ 'ACCOUNT.INDEX.ENABLE_2FA'|trans }}</a> )
+                    ( <a href="{{ url('account_enable2FA') }}">{{ 'ACCOUNT.INDEX.ENABLE_2FA'|trans }}</a> )
                 </td>
             {% endif %}
         </tr>
@@ -72,7 +76,7 @@
         {{ 'ACCOUNT.INDEX.CHANGE_PASSWORD_BUTTON'|trans }}
     </a>
 
-    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_change_password') }}">
+    <a class="btn btn-primary mx-2 my-2" href="{{ url('account_change_email') }}">
         {{ 'ACCOUNT.INDEX.CHANGE_EMAIL_BUTTON'|trans }}
     </a>
 
@@ -88,11 +92,11 @@
 
 
     {% if account.secret is not empty %}
-        <a class="btn btn-dark mx-2 my-2" href="{{ url('account_index') }}">
+        <a class="btn btn-dark mx-2 my-2" href="{{ url('account_disable2FA') }}">
             {{ 'ACCOUNT.INDEX.2_STEP_VERIFICATION'|trans }} - {{ 'ACCOUNT.INDEX.DISABLE_2FA'|trans }}
         </a>
     {% else %}
-        <a class="btn btn-success mx-2 my-2" href="{{ url('account_index') }}">
+        <a class="btn btn-success mx-2 my-2" href="{{ url('account_enable2FA') }}">
             {{ 'ACCOUNT.INDEX.2_STEP_VERIFICATION'|trans }} - {{ 'ACCOUNT.INDEX.ENABLE_2FA'|trans }}
         </a>
     {% endif %}
@@ -142,8 +146,14 @@
                 <td>{{ player.name }}</td>
                 <td>{{ player.level }} {{ player.vocation|vocationName }}</td>
                 <td>{{ player|playerOnlineStatus }}</td>
-                <td><a class="btn btn-sm btn-primary py-0 my-0"
-                       href="{{ url('player_edit', {'id':player.id}) }}">Edit</a></td>
+                <td>
+                    <a class="btn btn-sm btn-primary py-0 my-0" href="{{ url('player_edit', {'id':player.id}) }}">
+                        View
+                    </a>
+                    <a class="btn btn-sm btn-primary py-0 my-0" href="{{ url('player_edit', {'id':player.id}) }}">
+                        Edit
+                    </a>
+                </td>
             </tr>
         {% else %}
             <tr>

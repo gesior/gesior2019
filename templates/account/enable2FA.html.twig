@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ACCOUNT.ENABLE_2FA.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+    <a href="{{ url('account_index') }}" class="btn btn-sm btn-warning">
+        {{ 'Back'|trans }}
+    </a>
+
+    <h2>{{ 'ACCOUNT.ENABLE_2FA.TITLE'|trans }}</h2>
+
+    {{ form(form) }}
+
+{% endblock %}

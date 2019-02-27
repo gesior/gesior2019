@@ -45,3 +45,7 @@ services:
             - '%env(MAILER_SECURITY_MAILS_PER_MAIL_PER_HOUR)%'
             - '%env(MAILER_INFO_MAILS_PER_IP_PER_HOUR)%'
             - '%env(MAILER_SECURITY_MAILS_PER_IP_PER_HOUR)%'
+
+    App\Twig\AppExtension:
+        arguments:
+            $otsName: '%env(OTS_NAME)%'

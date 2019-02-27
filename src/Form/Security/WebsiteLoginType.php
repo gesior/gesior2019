@@ -28,7 +28,7 @@ class WebsiteLoginType extends AbstractType
                 ],
             ])
             ->add('secure_token', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'SECURITY.LOGIN.ACCOUNT_SECURE_TOKEN',
                 'disabled' => true,
                 'attr' => [

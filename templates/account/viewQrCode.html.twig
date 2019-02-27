@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'ACCOUNT.VIEW_QR.TITLE'|trans }}{% endblock %}
+
+{% block body %}
+    <a href="{{ url('account_index') }}" class="btn btn-sm btn-warning">
+        {{ 'Back'|trans }}
+    </a>
+
+    <h2>{{ 'ACCOUNT.VIEW_QR.TITLE'|trans }}</h2>
+
+    <p>{{ 'ACCOUNT.VIEW_QR.THIS_IS_YOUR_ACCOUNT_QR_CODE'|trans }}</p>
+
+    <div class="text-center">
+        <img src="{{ account|accountQrCodeImage }}" alt="ACCOUNT.VIEW_QR.TITLE"/>
+    </div>
+
+    <div class="text-center">
+        <p>{{ 'ACCOUNT.VIEW_QR.YOUR_SECRET_IS'|trans }}: <b>{{ account.secret }}</b></p>
+    </div>
+
+{% endblock %}

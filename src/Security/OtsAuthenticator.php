@@ -105,7 +105,7 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
         if (!$isTokenValid) {
             // invalid token IP log
             // invalid token account log
-            return $isTokenValid;
+            return false;
         }
 
         $isPasswordValid = $this->otsSecurityService->isValidPassword($user, $credentials['password']);
@@ -113,9 +113,10 @@ class OtsAuthenticator extends AbstractFormLoginAuthenticator
         if (!$isPasswordValid) {
             // invalid password IP log
             // invalid password account log
+            return false;
         }
 
-        return $isPasswordValid;
+        return true;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)

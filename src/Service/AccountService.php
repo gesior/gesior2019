@@ -69,6 +69,52 @@ class AccountService
     }
 
     /**
+     * @param Account $account
+     * @param string $currentPassword
+     * @param string $recoveryKey
+     * @throws LogicException
+     */
+    public function enable2FA(Account $account, string $currentPassword, string $recoveryKey)
+    {
+        if (!$this->otsSecurityService->isValidPassword($account, $currentPassword)) {
+            throw new LogicException($this->translate('ACCOUNT.ENABLE_2FA.INVALID_CURRENT_PASSWORD'));
+        }
+
+        if (empty($account->getKey())) {
+            throw new LogicException($this->translate('ACCOUNT.ENABLE_2FA.RECOVERY_KEY_REQUIRED'));
+        }
+
+        if (!$this->otsSecurityService->isValidRecoveryKey($account, $recoveryKey)) {
+            throw new LogicException($this->translate('ACCOUNT.ENABLE_2FA.INVALID_RECOVERY_KEY'));
+        }
+
+        $account->setSecret($this->otsSecurityService->generateToken());
+    }
+
+    /**
+     * @param Account $account
+     * @param string $currentPassword
+     * @param string $recoveryKey
+     * @throws LogicException
+     */
+    public function disable2FA(Account $account, string $currentPassword, string $recoveryKey)
+    {
+        if (!$this->otsSecurityService->isValidPassword($account, $currentPassword)) {
+            throw new LogicException($this->translate('ACCOUNT.DISABLE_2FA.INVALID_CURRENT_PASSWORD'));
+        }
+
+        if (empty($account->getKey())) {
+            throw new LogicException($this->translate('ACCOUNT.DISABLE_2FA.RECOVERY_KEY_REQUIRED'));
+        }
+
+        if (!$this->otsSecurityService->isValidRecoveryKey($account, $recoveryKey)) {
+            throw new LogicException($this->translate('ACCOUNT.DISABLE_2FA.INVALID_RECOVERY_KEY'));
+        }
+
+        $account->setSecret(null);
+    }
+
+    /**
      * @param string $password
      */
     private function validatePasswordFormat(string $password)

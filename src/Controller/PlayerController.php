@@ -168,12 +168,13 @@ class PlayerController extends AbstractOtsController
         $name = $request->query->get('playerName');
 
         $formattedName = $this->playerService->reformatName($name);
-        $error = $this->playerService->validateNameFormat($name);
+        $validatorResponse = $this->playerService->validateNameFormat($name);
 
         return $this->json(
             [
                 'formattedName' => $formattedName,
-                'error' => $error,
+                'error' => $validatorResponse->getValidationMessage(),
+                'isValid' => $validatorResponse->isValid(),
             ]
         );
     }
@@ -197,6 +198,7 @@ class PlayerController extends AbstractOtsController
                     $characterModel->getVocationId(),
                     $characterModel->getTownId()
                 );
+                $newPlayer->setAccount($this->getAccount());
 
                 $this->entityManager->persist($newPlayer);
                 $this->entityManager->flush();

@@ -50,6 +50,14 @@ class OtsSecurityService
     }
 
     /**
+     * @return string
+     */
+    public function generateToken()
+    {
+        return $this->googleAuthenticator->generateSecret();
+    }
+
+    /**
      * @param UserInterface|Account $account
      * @return bool
      */
@@ -57,7 +65,6 @@ class OtsSecurityService
     {
         return $account->getSecret() && !empty($account->getSecret());
     }
-
 
     /**
      * @param UserInterface|Account $account $account
@@ -71,6 +78,24 @@ class OtsSecurityService
         } else {
             return true;
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function generateRecoveryKey()
+    {
+        return $this->googleAuthenticator->generateSecret();
+    }
+
+    /**
+     * @param Account $account
+     * @param string $recoveyKey
+     * @return bool
+     */
+    public function isValidRecoveryKey(Account $account, string $recoveyKey)
+    {
+        return strtoupper($account->getKey()) === strtoupper($recoveyKey);
     }
 
 }

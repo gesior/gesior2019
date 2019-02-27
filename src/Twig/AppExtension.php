@@ -2,10 +2,13 @@
 
 namespace App\Twig;
 
+use App\Entity\Account;
 use App\Entity\Player;
 use App\Service\PlayerService;
 use App\Service\TownService;
 use App\Service\VocationService;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\QrCode;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -17,13 +20,20 @@ class AppExtension extends AbstractExtension
     private $townService;
     private $vocationService;
     private $templating;
+    private $otsName;
 
-    public function __construct(PlayerService $playerService, TownService $townService, VocationService $vocationService,Twig_Environment $templating)
-    {
+    public function __construct(
+        PlayerService $playerService,
+        TownService $townService,
+        VocationService $vocationService,
+        Twig_Environment $templating,
+        string $otsName
+    ) {
         $this->playerService = $playerService;
         $this->townService = $townService;
         $this->vocationService = $vocationService;
         $this->templating = $templating;
+        $this->otsName = $otsName;
     }
 
     public function getFunctions()
@@ -41,6 +51,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('townName', [$this, 'townName']),
             new TwigFilter('vocationName', [$this, 'vocationName']),
             new TwigFilter('vocationShortName', [$this, 'vocationShortName']),
+            new TwigFilter('accountQrCodeImage', [$this, 'accountQrCodeImage']),
         ];
     }
 
@@ -56,7 +67,7 @@ class AppExtension extends AbstractExtension
 
     public function playerOnlineStatus(Player $player)
     {
-        return $this>$this->isPlayerOnline($player) ? 'PLAYER.ONLINE' : 'PLAYER.OFFLINE';
+        return $this->isPlayerOnline($player) ? 'PLAYER.ONLINE' : 'PLAYER.OFFLINE';
     }
 
     public function townName(string $townId)
@@ -72,5 +83,17 @@ class AppExtension extends AbstractExtension
     public function vocationShortName(string $vocationId)
     {
         return $this->vocationService->getShortName($vocationId);
+    }
+
+    public function accountQrCodeImage(Account $account)
+    {
+        $urlFormat = 'otpauth://totp/%s:%s?secret=%s&issuer=%s';
+        $url = sprintf($urlFormat, $this->otsName, $account->getName(), $account->getSecret(), $this->otsName);
+
+        $qrCode = new QrCode($url);
+        $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+        $qrCode->setSize(400);
+
+        return $qrCode->writeDataUri();
     }
 }

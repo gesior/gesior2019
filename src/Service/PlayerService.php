@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Player;
+use App\Model\ValidatorResponse;
 use App\Security\OtsSecurityService;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
@@ -74,9 +75,9 @@ class PlayerService
      */
     public function createPlayer(string $name, int $sex, int $vocationId, int $townId)
     {
-        $nameValidationError = $this->validateNameFormat($name);
-        if ($nameValidationError !== false) {
-            throw new InvalidArgumentException($nameValidationError);
+        $nameValidatorReponse = $this->validateNameFormat($name);
+        if (!$nameValidatorReponse->isValid()) {
+            throw new InvalidArgumentException($nameValidatorReponse->getValidationMessage());
         }
 
         if (!in_array($sex, self::SEX_LIST)) {
@@ -92,11 +93,19 @@ class PlayerService
         }
 
         if ($name != 'asdasdasd') {
-            throw new InvalidArgumentException("final fail");
+          //  throw new InvalidArgumentException("final fail");
         }
 
+        $this->entityManager->detach($sampleCharacter);
         $formattedName = $this->reformatName($name);
-        $player = new Player();
+        $player = $sampleCharacter;
+        $player->setId(null);
+        $player->setName($formattedName);
+        $player->setSex($sex);
+        $player->setVocation($vocationId);
+        $player->setTownId($townId);
+        $player->setSave(true);
+
 
         return $player;
     }
@@ -136,7 +145,7 @@ class PlayerService
     {
         $vocationSampleCharacterNames = [
             0 => '0Rook Sample',
-            1 => '1Sorcerer Sample',
+            1 => 'Sorcerer Sample',
             2 => '2Druid Sample',
             3 => '3Paladin Sample',
             4 => '4Knight Sample',
@@ -199,9 +208,9 @@ class PlayerService
 
     /**
      * @param string $name
-     * @return string
+     * @return ValidatorResponse
      */
-    public function validateNameFormat(string $name)
+    public function validateNameFormat(string $name): ValidatorResponse
     {
         function spaceToWord($text): string
         {
@@ -211,85 +220,85 @@ class PlayerService
         $nameLower = strtolower($name);
 
         if (strlen($name) < self::NAME_MINIMUM_LENGTH) {
-            return $this->translate('PLAYER.NAME.TOO_SHORT',
+            return new ValidatorResponse($name, $this->translate('PLAYER.NAME.TOO_SHORT',
                 [
                     '%min%' => self::NAME_MINIMUM_LENGTH,
                 ]
-            );
+            ), false);
         }
 
         if (strlen($name) > self::NAME_MAXIMUM_LENGHT) {
-            return $this->translate(
+            return new ValidatorResponse($name, $this->translate(
                 'PLAYER.NAME.TOO_LONG',
                 [
                     '%max%' => self::NAME_MAXIMUM_LENGHT,
                 ]
-            );
+            ), false);
         }
 
         if (strlen($name) != strspn($name, self::NAME_ALLOWED_LETTERS)) {
-            return $this->translate(
+            return new ValidatorResponse($name, $this->translate(
                 'PLAYER.NAME.BLOCKED_CHARACTER',
                 [
                     '%rule%' => self::NAME_ALLOWED_LETTERS,
                     '%value%' => substr($name, strspn($name, self::NAME_ALLOWED_LETTERS), 1),
                 ]
-            );
+            ), false);
         }
 
         foreach (self::NAME_BLOCKED_NAMES as $illegalName) {
             if ($nameLower === $illegalName) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.BLOCKED_NAME',
                     [
                         '%rule%' => $illegalName,
                     ]
-                );
+                ), false);
             }
         }
 
         foreach (self::NAME_INVALID_FIRST_WORDS as $illegalFirstWord) {
             if (substr($nameLower, 0, strlen($illegalFirstWord)) === $illegalFirstWord) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.INVALID_FIRST_WORD',
                     [
                         '%rule%' => spaceToWord($illegalFirstWord),
                     ]
-                );
+                ), false);
             }
         }
 
         foreach (self::NAME_BLOCKED_LAST_WORDS as $illegalLastWord) {
             if (substr($nameLower, -strlen($illegalLastWord)) === $illegalLastWord) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.BLOCKED_LAST_WORD',
                     [
                         '%rule%' => spaceToWord($illegalLastWord),
                     ]
-                );
+                ), false);
             }
         }
 
         foreach (self::NAME_BLOCKED_WORDS as $illegalWord) {
             if (strpos($nameLower, $illegalWord) !== false) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.BLOCKED_WORD',
                     [
                         '%rule%' => spaceToWord($illegalWord),
                     ]
-                );
+                ), false);
             }
         }
 
         foreach (self::NAME_MAXIMUM_LETTERS_COUNT as $letter => $maxCount) {
             if (substr_count($nameLower, $letter) > $maxCount) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.MAXIMUM_LETTER_COUNT',
                     [
                         '%letter%' => spaceToWord($letter),
                         '%limit%' => $maxCount
                     ]
-                );
+                ), false);
             }
         }
 
@@ -305,22 +314,26 @@ class PlayerService
             }
 
             if ($letterRepeats > self::NAME_MAXIMUM_SAME_LETTER_SEQUENCE_LENGTH) {
-                return $this->translate(
+                return new ValidatorResponse($name, $this->translate(
                     'PLAYER.NAME.MAXIMUM_SAME_LETTER_SEQUENCE_LENGTH',
                     [
                         '%letter%' => spaceToWord($currentLetter),
                         '%limit%' => self::NAME_MAXIMUM_SAME_LETTER_SEQUENCE_LENGTH
                     ]
-                );
+                ), false);
             }
             $previousLetter = $currentLetter;
         }
         $player = $this->entityManager->getRepository(Player::class)->findOneByName($name);
 
         if ($player) {
-            return $this->translate('PLAYER.NAME.ALREADY_EXISTS', ['%name%' => $name]);
+            return new ValidatorResponse(
+                $name,
+                $this->translate('PLAYER.NAME.ALREADY_EXISTS', ['%name%' => $name]),
+                false
+            );
         }
 
-        return false;
+        return new ValidatorResponse($name, '', true);
     }
 }
