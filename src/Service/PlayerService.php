@@ -92,20 +92,13 @@ class PlayerService
             throw new RuntimeException("wtf");
         }
 
-        if ($name != 'asdasdasd') {
-          //  throw new InvalidArgumentException("final fail");
-        }
-
-        $this->entityManager->detach($sampleCharacter);
         $formattedName = $this->reformatName($name);
-        $player = $sampleCharacter;
-        $player->setId(null);
+        $player = new Player();
         $player->setName($formattedName);
         $player->setSex($sex);
         $player->setVocation($vocationId);
         $player->setTownId($townId);
         $player->setSave(true);
-
 
         return $player;
     }

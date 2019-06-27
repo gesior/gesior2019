@@ -99,30 +99,7 @@ class PlayerController extends AbstractOtsController
      */
     public function deleteCharacter(Request $request, Player $player)
     {
-        /*
-        if ($this->getAccount() !== $player->getAccount()) {
-            $this->addFlash('error', $this->translate('PLAYER.EDIT_INFORMATION.PLAYER_FROM_OTHER_ACCOUNT'));
-            return $this->redirectToRoute('account_index');
-        }
-
-        $form = $this->createForm(EditInformationType::class, $player);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($player);
-            $this->entityManager->flush();
-
-            $this->addFlash('success',
-                $this->translate('PLAYER.EDIT_INFORMATION.AFTER_CHANGE_MESSAGE', ['%name%' => $player->getName()])
-            );
-            return $this->redirectToRoute('account_index');
-        }
-
-        return $this->render('player/editInformation.html.twig', [
-            'form' => $form->createView(),
-            'player' => $player
-        ]);
-        */
+        /* TODO */
     }
 
     /**
@@ -132,30 +109,7 @@ class PlayerController extends AbstractOtsController
      */
     public function undeleteCharacter(Request $request, Player $player)
     {
-        /*
-        if ($this->getAccount() !== $player->getAccount()) {
-            $this->addFlash('error', $this->translate('PLAYER.EDIT_INFORMATION.PLAYER_FROM_OTHER_ACCOUNT'));
-            return $this->redirectToRoute('account_index');
-        }
-
-        $form = $this->createForm(EditInformationType::class, $player);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($player);
-            $this->entityManager->flush();
-
-            $this->addFlash('success',
-                $this->translate('PLAYER.EDIT_INFORMATION.AFTER_CHANGE_MESSAGE', ['%name%' => $player->getName()])
-            );
-            return $this->redirectToRoute('account_index');
-        }
-
-        return $this->render('player/editInformation.html.twig', [
-            'form' => $form->createView(),
-            'player' => $player
-        ]);
-        */
+        /* TODO */
     }
 
     /**
